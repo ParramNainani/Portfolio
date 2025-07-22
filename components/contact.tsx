@@ -6,8 +6,7 @@ import { gsap } from "gsap"
 export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
+  useEffect(() => {    const ctx = gsap.context(() => {
       gsap.fromTo(
         ".contact-item",
         { y: 50, opacity: 0 },
