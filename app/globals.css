@@ -118,6 +118,24 @@ html {
   animation: float 3s ease-in-out infinite;
 }
 
+@keyframes matrixRain {
+  0% {
+    top: -20px;
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 110vh;
+    opacity: 0.1;
+  }
+}
+
+.animate-matrix {
+  animation: matrixRain 4.5s linear infinite;
+}
+
 /* Matrix effect styles */
 .matrix-char {
   text-shadow: 0 0 5px currentColor;
