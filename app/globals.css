@@ -2,28 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Inter", sans-serif !important;
-}
-
-* {
-  font-family: "Inter", sans-serif !important;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-div,
-button,
-a {
-  font-family: "Inter", sans-serif !important;
-}
-
 /* Hide navigation initially */
 body:not(.show-nav) nav {
   pointer-events: none;
