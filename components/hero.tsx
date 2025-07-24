@@ -29,48 +29,41 @@ export default function Hero() {
         onUpdate: (self: any) => {
           if (self.progress >= 0.95) {
             setShowPortfolio(true);
-            gsap.to(".portfolio-content", { opacity: 1, duration: 0.8, ease: "power2.out" });
+            gsap.to(".portfolio-content", { opacity: 1, duration: 1.2, ease: "power3.inOut", overwrite: "auto" });
+            document.body.classList.add("show-nav");
           } else {
             setShowPortfolio(false);
-            gsap.to(".portfolio-content", { opacity: 0, duration: 0.2, ease: "power2.in" });
+            gsap.to(".portfolio-content", { opacity: 0, duration: 0.5, ease: "power3.inOut", overwrite: "auto" });
+            document.body.classList.remove("show-nav");
           }
         },
       }
     });
     tl.to(".hero-name", {
-      scale: 1000,
-      duration: 1,
-      ease: "power2.inOut"
+      scale: 1200,
+      duration: 1.5,
+      ease: "power3.inOut",
+      overwrite: "auto"
     });
 
     // Floating animation for hero-name
     gsap.to(".hero-name", {
       y: -10,
-      duration: 2,
+      duration: 2.5,
       repeat: -1,
       yoyo: true,
-      ease: "sine.inOut",
-    });
-
-    // Matrix rain animation
-    gsap.to(".matrix-char", {
-      y: "100vh",
-      duration: () => Math.random() * 4 + 3,
-      repeat: -1,
-      ease: "none",
-      stagger: {
-        each: 0.2,
-        repeat: -1,
-      },
+      ease: "power3.inOut",
+      overwrite: "auto"
     });
 
     // Scroll indicator bounce
     gsap.to(".scroll-indicator", {
       y: 10,
-      duration: 1.5,
+      duration: 1.8,
       repeat: -1,
       yoyo: true,
-      ease: "power2.inOut",
+      ease: "power3.inOut",
+      overwrite: "auto"
     });
   }, []);
 
@@ -79,7 +72,7 @@ export default function Hero() {
       {/* Initial Name Display */}
       <div className="hero-name absolute inset-0 flex items-center justify-start z-10 bg-white text-black" style={{ transformOrigin: '20% center' }}>
         <div ref={nameRef} className="text-center">
-          <h1 className="text-6xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-bold leading-none whitespace-nowrap">
+          <h1 className="text-4xl md:text-7xl lg:text-[6rem] xl:text-[8rem] font-bold leading-none whitespace-nowrap">
             {"PARRAM NAINANI".split("").map((letter, i, arr) => (
               <span
                 key={i}
@@ -117,13 +110,13 @@ export default function Hero() {
 
       {/* Portfolio Content - emerges from black */}
       <div ref={portfolioRef} className={`portfolio-content absolute inset-0 bg-black text-white z-30${showPortfolio ? '' : ' hidden'}`}>
-        <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center relative overflow-hidden px-2 md:px-0">
           {/* Enhanced Matrix rain background */}
           <div className="absolute inset-0 overflow-hidden">
             {[...Array(25)].map((_, i) => (
               <div
                 key={i}
-                className="matrix-char absolute text-green-700 font-mono opacity-40"
+                className="matrix-char absolute text-green-700 font-mono opacity-40 animate-matrix"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `-20px`,
@@ -139,7 +132,7 @@ export default function Hero() {
             {[...Array(15)].map((_, i) => (
               <div
                 key={`jp-${i}`}
-                className="matrix-char absolute text-green-600 font-mono opacity-30"
+                className="matrix-char absolute text-green-600 font-mono opacity-30 animate-matrix"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `-20px`,
@@ -156,13 +149,13 @@ export default function Hero() {
           <div className="text-center z-10">
             {/* Premium glitch effect name */}
             <div className="mb-4">
-              <GlitchText text="PARRAM NAINANI" className="text-6xl md:text-8xl font-bold text-black" />
+              <GlitchText text="PARRAM NAINANI" className="text-3xl md:text-6xl font-bold text-black" />
             </div>
-            <p className="text-xl md:text-2xl text-white mb-8">Student Developer • Python • Flutter • Firebase</p>
-            <p className="text-lg text-white max-w-2xl mx-auto leading-relaxed mb-12">
+            <p className="text-base md:text-xl text-white mb-8">Student Developer • Python • Flutter • Firebase</p>
+            <p className="text-sm md:text-lg text-white max-w-2xl mx-auto leading-relaxed mb-12">
               B.Tech Student at UPES Dehradun crafting digital experiences with code and creativity
             </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-bold text-lg hover:scale-110 transform transition-all duration-300 shadow-lg text-white">
+            <button className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-bold text-base md:text-lg hover:scale-110 transform transition-all duration-300 shadow-lg text-white">
               Explore My Universe
             </button>
           </div>
