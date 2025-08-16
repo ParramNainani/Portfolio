@@ -6,32 +6,34 @@ import { Rocket, Brain, Globe2, Zap, Target, Code, Cpu } from "lucide-react"
 export function FuturePage() {
   const roadmapItems = [
     {
-      quarter: "2025 Q1",
-      title: "SankatMochan-AI Platform",
+      quarter: "2024-2026",
+      title: "Academic & Practical AI Mastery",
       description:
-        "Launch SankatMochan-AI as a full SaaS platform with Panchang integration, Dasha analysis, and memory pattern extraction",
-      icon: Brain,
-      status: "planning",
-    },
-    {
-      quarter: "2025 Q2",
-      title: "Advanced Tech Mastery",
-      description: "Master TensorFlow, LangChain, Docker, PostgreSQL, and GraphQL for enterprise-level solutions",
+        "Deepening expertise in core AI/ML domains, aligning with advanced subjects like Deep Learning, NLP, and Computer Vision offered at UPES.",
       icon: Code,
       status: "in-progress",
     },
     {
-      quarter: "2025 Q3",
-      title: "Startup Launch",
-      description: "Launch tech startup at the intersection of data science and spiritual science",
-      icon: Rocket,
+      quarter: "2026",
+      title: "SankatMochan-AI Capstone Project",
+      description:
+        "Developing SankatMochan-AI into a comprehensive final year project, showcasing advanced AI/ML capabilities and launching it as a SaaS platform.",
+      icon: Brain,
+      status: "planning",
+    },
+    {
+      quarter: "2027",
+      title: "AI/ML Engineer Role",
+      description:
+        "Secure a challenging role as an AI/ML Engineer at a product-based company, applying academic knowledge to solve real-world problems.",
+      icon: Target,
       status: "upcoming",
     },
     {
-      quarter: "2026",
+      quarter: "2028+",
       title: "SaaS Empire",
-      description: "Build profitable SaaS product serving 10,000+ users with AI-powered life insights",
-      icon: Target,
+      description: "Build profitable SaaS product serving 10,000+ users with AI-powered life insights, evolving from the initial SankatMochan-AI concept.",
+      icon: Rocket,
       status: "future",
     },
   ]

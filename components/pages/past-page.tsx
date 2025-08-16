@@ -91,13 +91,16 @@ export function PastPage() {
               today."
             </p>
           </div>
-          <motion.button
+          <motion.a
+            href="https://drive.google.com/file/d/1JHaUegzuC1j9hEOGNSpEksfh9JD3Lgqk/view"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(217, 119, 6, 0.3)" }}
             whileTap={{ scale: 0.95 }}
-            className="mt-8 bg-gradient-to-r from-amber-700 to-amber-800 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-amber-800 hover:to-amber-900 transition-all shadow-lg"
+            className="mt-8 inline-block bg-gradient-to-r from-amber-700 to-amber-800 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-amber-800 hover:to-amber-900 transition-all shadow-lg"
           >
             📜 Download Resume
-          </motion.button>
+          </motion.a>
         </motion.div>
 
         {/* Timeline */}

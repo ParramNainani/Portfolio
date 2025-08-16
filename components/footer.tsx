@@ -13,7 +13,6 @@ export function Footer({ era }: FooterProps) {
     { icon: Github, href: "https://github.com/ParramNainani", label: "GitHub" },
     { icon: Linkedin, href: "https://linkedin.com/in/parramnainani", label: "LinkedIn" },
     { icon: Mail, href: "mailto:parramnainani@gmail.com", label: "Email" },
-    { icon: Globe, href: "https://paramnainani.dev", label: "Portfolio" },
   ]
 
   const getFooterStyles = () => {
@@ -45,7 +44,7 @@ export function Footer({ era }: FooterProps) {
   const styles = getFooterStyles()
 
   return (
-    <footer className={`border-t ${styles.bg} ${styles.text} py-12 mt-16`}>
+    <footer className={`relative z-20 border-t ${styles.bg} ${styles.text} py-12`}>
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -116,8 +115,8 @@ export function Footer({ era }: FooterProps) {
             }`}
           >
             {era === "future"
-              ? "© 2024 Param_Nainani | TEMPORAL_PORTFOLIO.v3.0 | AI_CONSCIOUSNESS.enabled"
-              : "© 2024 Param Nainani | Bridging Ancient Wisdom with Modern Technology"}
+              ? "© 2025 Param_Nainani | TEMPORAL_PORTFOLIO.v3.0 | AI_CONSCIOUSNESS.enabled"
+              : "© 2025 Param Nainani | Bridging Ancient Wisdom with Modern Technology"}
           </p>
         </motion.div>
       </div>

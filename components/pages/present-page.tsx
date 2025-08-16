@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code2, Database, Smartphone, Palette, Zap, Globe, Brain } from "lucide-react"
+import { Code2, Database, Smartphone, Palette, Zap, Globe, Brain, Link } from "lucide-react"
 
 export function PresentPage() {
   const skills = [
@@ -21,13 +21,14 @@ export function PresentPage() {
       tech: ["Python", "AI/ML", "Swiss Ephemeris", "Matplotlib", "Vedic Astrology", "Panchang"],
       status: "Ongoing",
       highlight: true,
+      link: "https://github.com/ParramNainani/SankatMochan-AI",
     },
     {
       title: "Apna Camphor",
       description:
         "Developed and launched complete Shopify store for camphor brand with custom features and optimizations",
       tech: ["Shopify", "Liquid", "Payment Integration", "SEO", "Custom Features"],
-      status: "Live",
+      status: "Completed", // Changed from "Live"
       highlight: false,
     },
     {
@@ -162,51 +163,57 @@ export function PresentPage() {
           <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
             <h2 className="text-4xl font-bold text-emerald-900 mb-8">Featured Projects</h2>
             <div className="space-y-6">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className={`bg-white/90 rounded-xl p-6 shadow-lg border-2 hover:shadow-xl transition-all backdrop-blur-sm ${
-                    project.highlight
-                      ? "border-emerald-300 bg-gradient-to-br from-white to-emerald-50"
-                      : "border-emerald-100"
-                  }`}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center space-x-3">
-                      {project.highlight && <Zap className="w-5 h-5 text-emerald-600" />}
-                      <h3 className="text-xl font-bold text-emerald-900">{project.title}</h3>
-                    </div>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-bold ${
-                        project.status === "Live"
-                          ? "bg-green-100 text-green-800"
-                          : project.status === "Ongoing"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : project.status === "Completed"
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-purple-100 text-purple-800"
-                      }`}
-                    >
-                      {project.status}
-                    </span>
-                  </div>
-                  <p className="text-emerald-700 mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
+              {projects.map((project, index) => {
+                const Wrapper = project.link ? motion.a : motion.div;
+                return (
+                  <Wrapper
+                    key={project.title}
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    whileHover={{ scale: 1.02, y: -5 }}
+                    className={`block bg-white/90 rounded-xl p-6 shadow-lg border-2 hover:shadow-xl transition-all backdrop-blur-sm ${
+                      project.highlight
+                        ? "border-emerald-300 bg-gradient-to-br from-white to-emerald-50"
+                        : "border-emerald-100"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        {project.highlight && <Zap className="w-5 h-5 text-emerald-600" />}
+                        <h3 className="text-xl font-bold text-emerald-900">{project.title}</h3>
+                      </div>
                       <span
-                        key={tech}
-                        className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-sm font-medium"
+                        className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          project.status === "Live"
+                            ? "bg-green-100 text-green-800"
+                            : project.status === "Ongoing"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : project.status === "Completed"
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-purple-100 text-purple-800"
+                        }`}
                       >
-                        {tech}
+                        {project.status}
                       </span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+                    </div>
+                    <p className="text-emerald-700 mb-4 leading-relaxed">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-sm font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </Wrapper>
+                )
+              })}
             </div>
 
             {/* Current Role */}
