@@ -92,7 +92,7 @@ export function PastPage() {
             </p>
           </div>
           <motion.a
-            href="https://drive.google.com/file/d/1JHaUegzuC1j9hEOGNSpEksfh9JD3Lgqk/view"
+            href="https://drive.google.com/file/d/1wifQg0kPMvbeGwFIOPPwnJaA9iw0Qygq/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(217, 119, 6, 0.3)" }}
