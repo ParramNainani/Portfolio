@@ -85,7 +85,7 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
   return (
     <motion.section
       style={{ opacity, scale }}
-      className={`sticky top-0 h-screen flex items-center justify-center ${getBackgroundClass()} relative overflow-hidden`}
+      className={`sticky top-0 h-svh w-full flex items-center justify-center ${getBackgroundClass()} relative overflow-hidden safe-screen`}
     >
       {/* Background Effects */}
       {era === "past" && (
@@ -127,13 +127,15 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
         </div>
       )}
 
-      <div className="text-center space-y-8 relative z-10">
+      
+
+  <div className="text-center space-y-6 sm:space-y-8 relative z-10 px-4">
         {/* Main Time Display */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className={`text-8xl md:text-9xl font-bold ${styles.time} tracking-tight`}
+          className={`text-5xl sm:text-7xl md:text-8xl font-bold ${styles.time} tracking-tight break-words`}
         >
           {formatTime(time)}
         </motion.div>
@@ -143,7 +145,7 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className={`text-2xl md:text-3xl ${styles.date}`}
+          className={`text-lg sm:text-2xl md:text-3xl ${styles.date}`}
         >
           {formatDate(time)}
         </motion.div>
@@ -153,7 +155,7 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className={`text-lg md:text-xl ${styles.label} uppercase tracking-widest`}
+          className={`text-sm sm:text-lg md:text-xl ${styles.label} uppercase tracking-widest`}
         >
           {era === "past" && "Chronicles of Yesterday"}
           {era === "present" && "Living in the Moment"}

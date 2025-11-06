@@ -94,10 +94,13 @@ function AnalogClock({ time, era, size }: { time: Date; era: TimeEra; size: "nor
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-200/20 via-transparent to-amber-800/10" />
         )}
 
+        
+
         {/* Clock Face */}
         <div
           className={`absolute ${size === "large" ? "inset-6" : "inset-3"} rounded-full flex items-center justify-center`}
         >
+          
           {/* Roman Numerals for Past */}
           {size === "large" &&
             era === "past" &&
@@ -218,15 +221,16 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
   }
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {/* Holographic Glow */}
       <div className="absolute -inset-4 bg-cyan-400/20 rounded-xl blur-lg" />
 
       <div
         className={`bg-slate-900 border-2 border-cyan-400 rounded-xl ${
-          size === "large" ? "p-8 shadow-2xl" : "p-6 shadow-lg"
-        } shadow-cyan-400/50 relative overflow-hidden`}
+          size === "large" ? "p-6 sm:p-8 shadow-2xl" : "p-4 sm:p-6 shadow-lg"
+        } shadow-cyan-400/50 relative overflow-hidden max-w-full`}
       >
+        
         {/* Animated Circuit Pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -240,6 +244,8 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
             }}
           />
         </div>
+
+        
 
         {/* Scan Line Effect */}
         <motion.div
@@ -255,7 +261,7 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
         />
 
         <motion.div
-          className={`font-mono ${size === "large" ? "text-6xl" : "text-4xl"} text-cyan-400 tracking-wider text-center font-bold relative z-10`}
+          className={`font-mono ${size === "large" ? "text-4xl sm:text-6xl" : "text-3xl sm:text-4xl"} text-cyan-400 tracking-wider text-center font-bold relative z-10 break-words`}
           animate={{
             opacity: [1, 0.8, 1],
             textShadow: [
@@ -270,13 +276,13 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
         </motion.div>
 
         {size === "large" && (
-          <div className="text-lg text-cyan-300 text-center mt-4 font-mono tracking-wide relative z-10">
+          <div className="text-base sm:text-lg text-cyan-300 text-center mt-4 font-mono tracking-wide relative z-10">
             {formatDate(time)}
           </div>
         )}
 
         <div
-          className={`${size === "large" ? "text-sm" : "text-xs"} text-cyan-500 text-center mt-3 font-mono uppercase tracking-widest relative z-10`}
+          className={`${size === "large" ? "text-xs sm:text-sm" : "text-[10px] sm:text-xs"} text-cyan-500 text-center mt-3 font-mono uppercase tracking-widest relative z-10`}
         >
           {size === "large" ? "◦ QUANTUM TEMPORAL INTERFACE ◦" : "FUTURE TIME"}
         </div>

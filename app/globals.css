@@ -6,6 +6,15 @@
   .text-balance {
     text-wrap: balance;
   }
+  .safe-screen {
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  .touch-target {
+    min-height: 44px;
+  }
 }
 
 @layer base {
@@ -93,4 +102,18 @@
 /* Past era should never be white */
 .past-theme {
   background: linear-gradient(to bottom, #fef7e0, #fef3c7) !important;
+}
+
+/* Orientation helpers */
+@media (orientation: landscape) and (max-height: 480px) {
+  .mobile-only-stacked {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Ensure full-height on mobile with dynamic viewport units */
+.min-h-svh {
+  min-height: 100svh;
 }

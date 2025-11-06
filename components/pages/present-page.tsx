@@ -32,12 +32,12 @@ export function PresentPage() {
       highlight: false,
     },
     {
-      title: "ArtMosaic.co.uk",
+      title: "AI‑Generated Content & Human Biases",
       description:
-        "Took over half-finished Shopify project, redesigned UI, optimized UX, and successfully launched (now closed)",
-      tech: ["Shopify", "Liquid", "JavaScript", "CSS", "UX Design"],
-      status: "Completed",
-      highlight: false,
+        "Ongoing research studying how AI-generated text and images shape human perception and decision-making biases through controlled experiments, dataset audits, and mitigation strategies.",
+      tech: ["Python", "NLP", "Computer Vision", "Experiment Design", "Statistics", "AI Ethics"],
+      status: "Research",
+      highlight: true,
     },
     {
       title: "Vedic AI Research",
@@ -46,6 +46,14 @@ export function PresentPage() {
       tech: ["Python", "AI", "Swiss Ephemeris", "Data Science", "Conversational AI"],
       status: "Research",
       highlight: true,
+    },
+    {
+      title: "LSGA‑ViT+CNN Image Recognizers",
+      description:
+        "Hybrid image recognition approach: CNN stem for local textures + Vision Transformer blocks augmented with Local Self‑Gating Attention for small‑feature sensitivity in symbolic/astrological imagery.",
+      tech: ["ViT", "CNN", "LSGA", "PyTorch", "Deep Learning"],
+      status: "Research",
+      highlight: false,
     },
   ]
 
@@ -65,7 +73,7 @@ export function PresentPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-teal-100 py-12 relative overflow-hidden">
+    <div className="min-h-svh safe-screen bg-gradient-to-b from-emerald-50 to-teal-100 relative overflow-hidden">
       {/* Enhanced Modern Background */}
       <div className="absolute inset-0 opacity-10">
         <motion.div
@@ -88,15 +96,15 @@ export function PresentPage() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
-          <h1 className="text-6xl font-bold text-emerald-900 mb-6">Current Arsenal</h1>
-          <p className="text-2xl text-emerald-700 leading-relaxed">
-            <strong>Param Nainani</strong> • Shopify Web Developer | Python & AI Engineer | UI Designer
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10 sm:mb-16">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-emerald-900 mb-4 sm:mb-6">Current Arsenal</h1>
+          <p className="text-lg sm:text-2xl text-emerald-700 leading-relaxed">
+            <strong>Parram Nainani</strong> • Shopify Web Developer | Python & AI Engineer | UI Designer
           </p>
-          <p className="text-lg text-emerald-600 mt-2">📍 New Delhi, India</p>
-          <div className="mt-6 flex justify-center space-x-3">
+          <p className="text-base sm:text-lg text-emerald-600 mt-2">📍 New Delhi, India</p>
+          <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-3">
             <div className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold">
               B.Tech Computer Science
             </div>
@@ -106,10 +114,10 @@ export function PresentPage() {
           </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 mobile-only-stacked">
           {/* Skills Section */}
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
-            <h2 className="text-4xl font-bold text-emerald-900 mb-8">Technical Mastery</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-emerald-900 mb-6 sm:mb-8">Technical Mastery</h2>
             <div className="space-y-6">
               {skills.map((skill, index) => (
                 <motion.div
@@ -117,7 +125,7 @@ export function PresentPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
-                  className="bg-white/80 rounded-xl p-6 shadow-lg border border-emerald-100 backdrop-blur-sm hover:shadow-xl transition-all"
+                  className="bg-white/80 rounded-xl p-5 sm:p-6 shadow-lg border border-emerald-100 backdrop-blur-sm hover:shadow-xl transition-all"
                   whileHover={{ scale: 1.02, y: -2 }}
                 >
                   <div className="flex items-center space-x-4 mb-4">
@@ -141,7 +149,7 @@ export function PresentPage() {
 
             {/* Tech Stack */}
             <div className="mt-12">
-              <h3 className="text-2xl font-bold text-emerald-900 mb-6">Technology Stack</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-4 sm:mb-6">Technology Stack</h3>
               <div className="flex flex-wrap gap-3">
                 {techStack.map((tech, index) => (
                   <motion.span
@@ -149,7 +157,7 @@ export function PresentPage() {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1 + index * 0.05 }}
-                    className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all cursor-default"
+                    className="px-3 sm:px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transition-all cursor-default"
                     whileHover={{ scale: 1.05, y: -2 }}
                   >
                     {tech}
@@ -161,7 +169,7 @@ export function PresentPage() {
 
           {/* Projects Section */}
           <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
-            <h2 className="text-4xl font-bold text-emerald-900 mb-8">Featured Projects</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold text-emerald-900 mb-6 sm:mb-8">Featured Projects</h2>
             <div className="space-y-6">
               {projects.map((project, index) => {
                 const Wrapper = project.link ? motion.a : motion.div;
@@ -175,7 +183,7 @@ export function PresentPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                     whileHover={{ scale: 1.02, y: -5 }}
-                    className={`block bg-white/90 rounded-xl p-6 shadow-lg border-2 hover:shadow-xl transition-all backdrop-blur-sm ${
+                    className={`block bg-white/90 rounded-xl p-5 sm:p-6 shadow-lg border-2 hover:shadow-xl transition-all backdrop-blur-sm ${
                       project.highlight
                         ? "border-emerald-300 bg-gradient-to-br from-white to-emerald-50"
                         : "border-emerald-100"
@@ -221,7 +229,7 @@ export function PresentPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
-              className="mt-12 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl p-6 text-white shadow-xl"
+              className="mt-10 sm:mt-12 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl p-5 sm:p-6 text-white shadow-xl"
             >
               <h3 className="text-2xl font-bold mb-3">Current Role</h3>
               <p className="text-emerald-100 text-lg leading-relaxed">

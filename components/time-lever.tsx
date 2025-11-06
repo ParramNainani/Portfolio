@@ -58,7 +58,7 @@ export function TimeLever({ currentEra, onEraChange }: TimeLeverProps) {
   const styles = getThemeStyles()
 
   return (
-    <div className="flex flex-col items-center space-y-6">
+  <div className="flex flex-col items-center space-y-6">
       {/* Lever Mechanism */}
       <div className="relative">
         {/* Lever Base */}
@@ -95,7 +95,7 @@ export function TimeLever({ currentEra, onEraChange }: TimeLeverProps) {
       </div>
 
       {/* Era Selection Buttons */}
-      <div className="flex space-x-3">
+  <div className="flex flex-wrap justify-center gap-3">
         {(["past", "present", "future"] as TimeEra[]).map((era) => {
           const isActive = currentEra === era
           const getButtonStyles = () => {
@@ -118,7 +118,7 @@ export function TimeLever({ currentEra, onEraChange }: TimeLeverProps) {
             <motion.button
               key={era}
               onClick={() => onEraChange(era)}
-              className={`px-6 py-3 rounded-lg font-semibold text-sm border-2 transition-all shadow-lg ${getButtonStyles()}`}
+              className={`px-5 py-3 rounded-lg font-semibold text-sm border-2 transition-all shadow-lg ${getButtonStyles()}`}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >

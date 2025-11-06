@@ -45,13 +45,72 @@ export default function HomePage() {
     <div className="relative">
       {/* Hero Section - Clock and Lever Only */}
       <section
-        className={`min-h-screen flex flex-col items-center justify-center px-6 transition-all duration-1000 ${getBackgroundClass()}`}
+        className={`min-h-svh w-full flex flex-col items-center justify-center px-4 sm:px-6 transition-all duration-1000 ${getBackgroundClass()}`}
       >
+        {/* Giant Name Backdrop (positioned above the clock) */}
+        <div className="absolute inset-0 flex justify-center items-start pt-[8vh] md:pt-[10vh] pointer-events-none select-none">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 0.15, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className={`font-extrabold uppercase tracking-[-0.04em] text-center leading-none drop-shadow-sm bg-clip-text text-transparent 
+              ${
+                currentEra === "past"
+                  ? "bg-gradient-to-b from-amber-900 to-amber-700"
+                  : currentEra === "present"
+                    ? "bg-gradient-to-b from-emerald-900 to-emerald-700"
+                    : "bg-gradient-to-b from-cyan-500 to-cyan-300"
+              }
+            `}
+            style={{ fontSize: "clamp(2.75rem, 16vw, 12rem)", lineHeight: 1 }}
+          >
+            PARAM NAINANI
+          </motion.h1>
+        </div>
+
+        {/* Floating Quotes (hidden on phones) */}
+        <div className="absolute inset-x-0 bottom-8 sm:bottom-14 px-4 pointer-events-none select-none">
+          <div className="max-w-7xl mx-auto">
+            <div className="hidden sm:flex items-start justify-between gap-8">
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className={`${
+                  currentEra === "past"
+                    ? "text-amber-900/90"
+                    : currentEra === "present"
+                      ? "text-emerald-900/90"
+                      : "text-cyan-300/90"
+                } text-sm sm:text-base max-w-sm font-medium`}
+              >
+                Hello, I’m Parram, a designer‑engineer who blends AI, UX, and code to shape delightful, performant
+                experiences.
+              </motion.p>
+
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.45 }}
+                className={`${
+                  currentEra === "past"
+                    ? "text-amber-900/90"
+                    : currentEra === "present"
+                      ? "text-emerald-900/90"
+                      : "text-cyan-300/90"
+                } text-sm sm:text-base max-w-sm text-right font-medium`}
+              >
+                I turn ideas into interfaces that inspire action—rooted in research, crafted with care, and shipped with
+                speed.
+              </motion.p>
+            </div>
+          </div>
+        </div>
         {/* PAST - Medieval Manuscript Vibes */}
         {currentEra === "past" && (
           <>
             {/* Parchment Background with Texture */}
-            <div className="absolute inset-0 opacity-40">
+            <div className="absolute inset-0 opacity-40 pointer-events-none overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-200/60 via-yellow-100/40 to-amber-300/60" />
               {/* Multiple Coffee Stains */}
               <div className="absolute top-20 left-16 w-32 h-32 bg-amber-800/30 rounded-full blur-md" />
@@ -74,20 +133,20 @@ export default function HomePage() {
               style={{ clipPath: "polygon(8% 0, 92% 0, 100% 100%, 0 100%)" }}
             />
             <div
-              className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-amber-300/60 to-transparent"
+              className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-amber-300/60 to-transparent max-sm:hidden"
               style={{ clipPath: "polygon(0 0, 100% 5%, 100% 95%, 0 100%)" }}
             />
             <div
-              className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-amber-300/60 to-transparent"
+              className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-amber-300/60 to-transparent max-sm:hidden"
               style={{ clipPath: "polygon(0 5%, 100% 0, 100% 100%, 0 95%)" }}
             />
 
             {/* Vintage Stamps Collection */}
-            <div className="absolute top-12 right-12 w-20 h-24 border-4 border-amber-800/50 bg-amber-100/70 rotate-12 flex flex-col items-center justify-center shadow-lg">
+            <div className="absolute top-12 right-12 w-20 h-24 border-4 border-amber-800/50 bg-amber-100/70 rotate-12 flex flex-col items-center justify-center shadow-lg max-sm:hidden">
               <span className="text-amber-800/70 text-xs font-bold">VINTAGE</span>
               <span className="text-amber-700/60 text-[8px]">1885</span>
             </div>
-            <div className="absolute top-20 right-40 w-16 h-20 border-3 border-red-800/40 bg-red-100/60 -rotate-6 flex items-center justify-center shadow-md">
+            <div className="absolute top-20 right-40 w-16 h-20 border-3 border-red-800/40 bg-red-100/60 -rotate-6 flex items-center justify-center shadow-md max-sm:hidden">
               <span className="text-red-800/60 text-[10px] font-bold">CLASSIC</span>
             </div>
 
@@ -447,9 +506,12 @@ export default function HomePage() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center space-y-16 relative z-10"
+          className="flex flex-col items-center space-y-12 sm:space-y-16 relative z-10"
         >
-          <Clock era={currentEra} size="large" />
+          {/* Phone view: smaller clock to avoid overflow */}
+          <div className="scale-85 xs:scale-90 sm:scale-100 origin-center">
+            <Clock era={currentEra} size="large" />
+          </div>
           <TimeLever currentEra={currentEra} onEraChange={setCurrentEra} />
         </motion.div>
 
@@ -458,7 +520,8 @@ export default function HomePage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 1 }}
-          className="absolute bottom-8 text-center"
+          className="absolute text-center w-full"
+          style={{ bottom: "max(2rem, env(safe-area-inset-bottom))" }}
         >
           <motion.p
             className={`text-sm font-medium ${

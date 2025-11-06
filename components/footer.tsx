@@ -72,7 +72,7 @@ export function Footer({ era }: FooterProps) {
                   : "Building the future, one line of code at a time"}
             </p>
             <p className={`${styles.accent} text-sm mt-2`}>
-              <strong>Param Nainani</strong> • New Delhi, India
+              <strong>Parram Nainani</strong> • New Delhi, India
             </p>
           </div>
 
@@ -115,8 +115,8 @@ export function Footer({ era }: FooterProps) {
             }`}
           >
             {era === "future"
-              ? "© 2025 Param_Nainani | TEMPORAL_PORTFOLIO.v3.0 | AI_CONSCIOUSNESS.enabled"
-              : "© 2025 Param Nainani | Bridging Ancient Wisdom with Modern Technology"}
+              ? "© 2025 Parram_Nainani | TEMPORAL_PORTFOLIO.v3.0 | AI_CONSCIOUSNESS.enabled"
+              : "© 2025 Parram Nainani | Bridging Ancient Wisdom with Modern Technology"}
           </p>
         </motion.div>
       </div>
