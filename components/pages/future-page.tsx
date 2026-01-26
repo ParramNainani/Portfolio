@@ -89,7 +89,7 @@ export function FuturePage() {
   const dreamsToRender = isMobile && !showAllDreams ? dreamProjects.slice(0, 2) : dreamProjects
 
   return (
-    <div className="min-h-svh safe-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white relative overflow-hidden">
+    <div className="min-h-[100svh] safe-screen bg-gradient-to-b from-slate-900 to-slate-800 text-white relative overflow-hidden">
       {/* Enhanced Cyberpunk Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Matrix Rain */}
@@ -118,8 +118,8 @@ export function FuturePage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10 sm:mb-16">
-          <h1 className="text-4xl sm:text-6xl font-bold text-cyan-400 mb-4 sm:mb-6 font-mono">FUTURE.PROTOCOL</h1>
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8 sm:mb-12 pt-8 sm:pt-12">
+          <h1 className="text-4xl sm:text-6xl font-bold text-cyan-400 mb-3 sm:mb-4 font-mono">FUTURE.PROTOCOL</h1>
           <p className="text-lg sm:text-2xl text-cyan-300 font-mono leading-relaxed">
             {">"} Parram_Nainani.exe - Building the intersection of AI and consciousness
           </p>

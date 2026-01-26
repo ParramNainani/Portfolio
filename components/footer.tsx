@@ -115,8 +115,8 @@ export function Footer({ era }: FooterProps) {
             }`}
           >
             {era === "future"
-              ? "© 2025 Parram_Nainani | TEMPORAL_PORTFOLIO.v3.0 | AI_CONSCIOUSNESS.enabled"
-              : "© 2025 Parram Nainani | Bridging Ancient Wisdom with Modern Technology"}
+              ? "© 2026 Parram_Nainani | TEMPORAL_PORTFOLIO.v3.0 | AI_CONSCIOUSNESS.enabled"
+              : "© 2026 Parram Nainani | Bridging Ancient Wisdom with Modern Technology"}
           </p>
         </motion.div>
       </div>

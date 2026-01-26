@@ -1,9 +1,16 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { GraduationCap, Code, Award, Star, Zap } from "lucide-react"
 
 export function PastPage() {
+  const [showAbout, setShowAbout] = useState(false)
+  const aboutParagraphs = [
+    "In the bustling streets of New Delhi, a curious mind discovered the magic of code in 2020. What started as simple Python scripts evolved into a journey that would bridge the ancient wisdom of Vedic astrology with cutting-edge artificial intelligence.",
+    "From building image sorters with OpenCV to launching Shopify empires, from pursuing B.Tech in Computer Science to creating AI engines that decode planetary movements - this is the story of transformation through technology.",
+    "Every line of code written in the past was a stepping stone to the AI-powered future we're building today.",
+  ]
   const timelineEvents = [
     {
       year: "2020",
@@ -45,7 +52,7 @@ export function PastPage() {
   ]
 
   return (
-    <div className="min-h-svh safe-screen bg-gradient-to-b from-amber-50 to-amber-100 relative overflow-hidden">
+    <div className="min-h-[100svh] safe-screen bg-gradient-to-b from-amber-50 to-amber-100 relative overflow-hidden">
       {/* Enhanced Vintage Background */}
       <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
         <div className="absolute top-10 left-10 w-40 h-40 bg-amber-800/20 rounded-full blur-xl max-sm:hidden" />
@@ -55,8 +62,8 @@ export function PastPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10 sm:mb-16">
-          <h1 className="text-4xl sm:text-6xl font-serif text-amber-900 mb-4 sm:mb-6">The Genesis Chronicles</h1>
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12 sm:mb-20 pt-8 sm:pt-12">
+          <h1 className="text-4xl sm:text-6xl font-serif text-amber-900 mb-3 sm:mb-4">The Genesis Chronicles</h1>
           <p className="text-lg sm:text-2xl text-amber-700 font-serif italic leading-relaxed">
             "From Python's first 'Hello World' to building AI that reads the stars..."
           </p>
@@ -76,21 +83,16 @@ export function PastPage() {
         >
           <h2 className="text-3xl sm:text-4xl font-serif text-amber-900 mb-4 sm:mb-6">The Origin Story</h2>
           <div className="text-amber-800 leading-relaxed font-serif text-base sm:text-lg space-y-4">
-            <p>
-              In the bustling streets of <strong>New Delhi</strong>, a curious mind discovered the magic of code in
-              2020. What started as simple Python scripts evolved into a journey that would bridge the ancient wisdom of
-              Vedic astrology with cutting-edge artificial intelligence.
-            </p>
-            <p>
-              From building image sorters with OpenCV to launching Shopify empires, from pursuing B.Tech in Computer
-              Science to creating AI engines that decode planetary movements - this is the story of transformation
-              through technology.
-            </p>
-            <p className="text-amber-700 italic">
-              "Every line of code written in the past was a stepping stone to the AI-powered future we're building
-              today."
-            </p>
+            {(showAbout ? aboutParagraphs : aboutParagraphs.slice(0, 1)).map((text) => (
+              <p key={text}>{text}</p>
+            ))}
           </div>
+          <button
+            onClick={() => setShowAbout((v) => !v)}
+            className="mt-4 inline-flex items-center text-sm font-semibold text-amber-800 underline-offset-2 hover:underline decoration-2"
+          >
+            {showAbout ? "Show less" : "Show more"}
+          </button>
           <motion.a
             href="https://drive.google.com/file/d/1wifQg0kPMvbeGwFIOPPwnJaA9iw0Qygq/view?usp=sharing"
             target="_blank"
@@ -104,11 +106,11 @@ export function PastPage() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div className="relative mb-20 sm:mb-28">
           <h2 className="text-3xl sm:text-4xl font-serif text-amber-900 mb-8 sm:mb-12 text-center">The Journey Through Time</h2>
 
           {/* Timeline Line */}
-          <div className="absolute left-6 sm:left-8 top-20 bottom-0 w-1 bg-gradient-to-b from-amber-400 via-amber-500 to-amber-600 shadow-lg"></div>
+          <div className="absolute left-6 sm:left-8 top-20 bottom-32 w-1 bg-gradient-to-b from-amber-400 via-amber-500 to-amber-600 shadow-lg"></div>
 
           <div className="space-y-8 sm:space-y-12">
             {timelineEvents.map((event, index) => (
@@ -151,7 +153,7 @@ export function PastPage() {
               className="inline-flex items-center space-x-4 text-amber-600"
             >
               <span className="text-3xl">✦</span>
-              <span className="font-serif text-xl text-amber-800">The foundation was laid...</span>
+              <span className="font-serif text-xl text-amber-800">The Foundation was laid...</span>
               <span className="text-3xl">✦</span>
             </motion.div>
           </div>
@@ -159,4 +161,4 @@ export function PastPage() {
       </div>
     </div>
   )
-}
+} 

@@ -9,11 +9,20 @@ import { PastPage } from "@/components/pages/past-page"
 import { PresentPage } from "@/components/pages/present-page"
 import { FuturePage } from "@/components/pages/future-page"
 import { Footer } from "@/components/footer"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export type TimeEra = "past" | "present" | "future"
 
 export default function HomePage() {
   const [currentEra, setCurrentEra] = useState<TimeEra>("present")
+  const isMobile = useIsMobile()
+
+  const dustCount = isMobile ? 8 : 25
+  const presentShapeCount = isMobile ? 5 : 12
+  const presentBubbleCount = isMobile ? 4 : 8
+  const presentParticleCount = isMobile ? 12 : 30
+  const futureRainCount = isMobile ? 12 : 30
+  const futureHologramCount = isMobile ? 8 : 15
 
   const renderCurrentPage = () => {
     switch (currentEra) {
@@ -42,10 +51,10 @@ export default function HomePage() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative overflow-x-hidden">
       {/* Hero Section - Clock and Lever Only */}
       <section
-        className={`min-h-svh w-full flex flex-col items-center justify-center px-4 sm:px-6 transition-all duration-1000 ${getBackgroundClass()}`}
+        className={`min-h-[100svh] w-full flex flex-col items-center justify-center px-4 sm:px-6 transition-all duration-1000 ${getBackgroundClass()}`}
       >
         {/* Giant Name Backdrop (positioned above the clock) */}
         <div className="absolute inset-0 flex justify-center items-start pt-[8vh] md:pt-[10vh] pointer-events-none select-none">
@@ -161,7 +170,7 @@ export default function HomePage() {
             </div>
 
             {/* Floating Dust Particles */}
-            {[...Array(25)].map((_, i) => (
+            {[...Array(dustCount)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-amber-600/30 rounded-full"
@@ -219,7 +228,7 @@ export default function HomePage() {
             </div>
 
             {/* Floating Geometric Shapes */}
-            {[...Array(12)].map((_, i) => (
+            {[...Array(presentShapeCount)].map((_, i) => (
               <motion.div
                 key={i}
                 className={`absolute ${
@@ -248,7 +257,7 @@ export default function HomePage() {
             ))}
 
             {/* Glassmorphism Bubbles */}
-            {[...Array(8)].map((_, i) => (
+            {[...Array(presentBubbleCount)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
@@ -272,7 +281,7 @@ export default function HomePage() {
             ))}
 
             {/* Particle Stream */}
-            {[...Array(30)].map((_, i) => (
+            {[...Array(presentParticleCount)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute w-1 h-1 bg-emerald-400/60 rounded-full"
@@ -324,7 +333,7 @@ export default function HomePage() {
           <>
             {/* Enhanced Matrix Digital Rain */}
             <div className="absolute inset-0 overflow-hidden">
-              {[...Array(30)].map((_, i) => (
+              {[...Array(futureRainCount)].map((_, i) => (
                 <motion.div
                   key={i}
                   className="absolute text-cyan-400/40 font-mono text-sm"
@@ -389,7 +398,7 @@ export default function HomePage() {
 
             {/* Enhanced Floating Holograms */}
             <div className="absolute inset-0 pointer-events-none">
-              {[...Array(15)].map((_, i) => (
+              {[...Array(futureHologramCount)].map((_, i) => (
                 <motion.div
                   key={i}
                   className="absolute bg-cyan-400/70 rounded-full shadow-lg shadow-cyan-400/50"

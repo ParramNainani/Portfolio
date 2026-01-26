@@ -1,9 +1,14 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
-import { Code2, Database, Smartphone, Palette, Zap, Globe, Brain, Link } from "lucide-react"
+import { Code2, Database, Smartphone, Palette, Zap, Globe, Brain, Navigation, Trophy, Circle } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export function PresentPage() {
+  const [expandedProjects, setExpandedProjects] = useState<Record<string, boolean>>({})
+  const [showAllProjects, setShowAllProjects] = useState(false)
+  const isMobile = useIsMobile()
   const skills = [
     { name: "Python & AI", level: 95, icon: Brain, color: "bg-blue-500" },
     { name: "Shopify Development", level: 90, icon: Globe, color: "bg-green-500" },
@@ -32,12 +37,12 @@ export function PresentPage() {
       highlight: false,
     },
     {
-      title: "AI‑Generated Content & Human Biases",
+      title: "ArtMosaic.co.uk",
       description:
-        "Ongoing research studying how AI-generated text and images shape human perception and decision-making biases through controlled experiments, dataset audits, and mitigation strategies.",
-      tech: ["Python", "NLP", "Computer Vision", "Experiment Design", "Statistics", "AI Ethics"],
-      status: "Research",
-      highlight: true,
+        "Took over half-finished Shopify project, redesigned UI, optimized UX, and successfully launched (now closed)",
+      tech: ["Shopify", "Liquid", "JavaScript", "CSS", "UX Design"],
+      status: "Completed",
+      highlight: false,
     },
     {
       title: "Vedic AI Research",
@@ -73,7 +78,7 @@ export function PresentPage() {
   ]
 
   return (
-    <div className="min-h-svh safe-screen bg-gradient-to-b from-emerald-50 to-teal-100 relative overflow-hidden">
+    <div className="min-h-[100svh] safe-screen bg-gradient-to-b from-emerald-50 to-teal-100 relative overflow-hidden overflow-x-hidden px-3 sm:px-0">
       {/* Enhanced Modern Background */}
       <div className="absolute inset-0 opacity-10">
         <motion.div
@@ -98,18 +103,24 @@ export function PresentPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10 sm:mb-16">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-emerald-900 mb-4 sm:mb-6">Current Arsenal</h1>
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8 sm:mb-12 pt-8 sm:pt-12">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-emerald-900 mb-3 sm:mb-4">Current Arsenal</h1>
           <p className="text-lg sm:text-2xl text-emerald-700 leading-relaxed">
             <strong>Parram Nainani</strong> • Shopify Web Developer | Python & AI Engineer | UI Designer
           </p>
           <p className="text-base sm:text-lg text-emerald-600 mt-2">📍 New Delhi, India</p>
           <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-3">
-            <div className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold">
-              B.Tech Computer Science
+            <div className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold flex items-center gap-2">
+              <Circle className="w-3 h-3" /> B.Tech Computer Science
             </div>
-            <div className="px-4 py-2 bg-teal-100 text-teal-800 rounded-full text-sm font-semibold">
-              Certified Shopify Developer
+            <div className="px-4 py-2 bg-teal-100 text-teal-800 rounded-full text-sm font-semibold flex items-center gap-2">
+              <Circle className="w-3 h-3" /> Certified Shopify Developer
+            </div>
+            <div className="px-4 py-2 bg-amber-100 text-amber-900 rounded-full text-sm font-semibold flex items-center gap-2">
+              <Trophy className="w-4 h-4" /> SIH Grand Finale Qualifier
+            </div>
+            <div className="px-4 py-2 bg-cyan-100 text-cyan-900 rounded-full text-sm font-semibold flex items-center gap-2">
+              <Navigation className="w-4 h-4" /> Founder, NaviiGO
             </div>
           </div>
         </motion.div>
@@ -157,10 +168,10 @@ export function PresentPage() {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1 + index * 0.05 }}
-                    className="px-3 sm:px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transition-all cursor-default"
+                    className="px-3 sm:px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transition-all cursor-default inline-flex items-center gap-2"
                     whileHover={{ scale: 1.05, y: -2 }}
                   >
-                    {tech}
+                    <Circle className="w-3 h-3" /> {tech}
                   </motion.span>
                 ))}
               </div>
@@ -170,9 +181,14 @@ export function PresentPage() {
           {/* Projects Section */}
           <motion.div initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
             <h2 className="text-3xl sm:text-4xl font-bold text-emerald-900 mb-6 sm:mb-8">Featured Projects</h2>
-            <div className="space-y-6">
-              {projects.map((project, index) => {
+            <div className="space-y-5 sm:space-y-6">
+              {(showAllProjects ? projects : projects.slice(0, 3)).map((project, index) => {
                 const Wrapper = project.link ? motion.a : motion.div;
+                const isExpanded = !!expandedProjects[project.title]
+                const canTruncate = project.description.length > 140
+                const displayText = !isExpanded && canTruncate
+                  ? `${project.description.slice(0, 140).trim()}...`
+                  : project.description
                 return (
                   <Wrapper
                     key={project.title}
@@ -183,7 +199,7 @@ export function PresentPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 + index * 0.1 }}
                     whileHover={{ scale: 1.02, y: -5 }}
-                    className={`block bg-white/90 rounded-xl p-5 sm:p-6 shadow-lg border-2 hover:shadow-xl transition-all backdrop-blur-sm ${
+                    className={`block bg-white/90 rounded-xl p-4 sm:p-6 shadow-lg border-2 hover:shadow-xl transition-all backdrop-blur-sm ${
                       project.highlight
                         ? "border-emerald-300 bg-gradient-to-br from-white to-emerald-50"
                         : "border-emerald-100"
@@ -195,7 +211,7 @@ export function PresentPage() {
                         <h3 className="text-xl font-bold text-emerald-900">{project.title}</h3>
                       </div>
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold ${
+                        className={`px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-2 ${
                           project.status === "Live"
                             ? "bg-green-100 text-green-800"
                             : project.status === "Ongoing"
@@ -205,23 +221,44 @@ export function PresentPage() {
                                 : "bg-purple-100 text-purple-800"
                         }`}
                       >
-                        {project.status}
+                        <Circle className="w-3 h-3" /> {project.status}
                       </span>
                     </div>
-                    <p className="text-emerald-700 mb-4 leading-relaxed">{project.description}</p>
+                    <p className="text-emerald-700 mb-4 leading-relaxed">{displayText}</p>
+                    {canTruncate && (
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault()
+                          setExpandedProjects((prev) => ({ ...prev, [project.title]: !isExpanded }))
+                        }}
+                        className="text-sm font-semibold text-emerald-700 underline-offset-4 hover:underline"
+                      >
+                        {isExpanded ? "Show less" : "Show more"}
+                      </button>
+                    )}
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-sm font-medium"
+                          className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-lg text-sm font-medium inline-flex items-center gap-2"
                         >
-                          {tech}
+                          <Circle className="w-3 h-3" /> {tech}
                         </span>
                       ))}
                     </div>
                   </Wrapper>
                 )
               })}
+              {projects.length > 3 && (
+                <div className="pt-1">
+                  <button
+                    onClick={() => setShowAllProjects((v) => !v)}
+                    className="text-sm font-semibold text-emerald-800 underline-offset-4 hover:underline"
+                  >
+                    {showAllProjects ? "Show less projects" : "Show more projects"}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Current Role */}
