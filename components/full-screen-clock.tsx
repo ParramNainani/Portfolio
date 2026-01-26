@@ -127,8 +127,6 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
         </div>
       )}
 
-      
-
   <div className="text-center space-y-6 sm:space-y-8 relative z-10 px-4">
         {/* Main Time Display */}
         <motion.div

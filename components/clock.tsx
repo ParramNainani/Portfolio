@@ -94,13 +94,10 @@ function AnalogClock({ time, era, size }: { time: Date; era: TimeEra; size: "nor
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-200/20 via-transparent to-amber-800/10" />
         )}
 
-        
-
         {/* Clock Face */}
         <div
           className={`absolute ${size === "large" ? "inset-6" : "inset-3"} rounded-full flex items-center justify-center`}
         >
-          
           {/* Roman Numerals for Past */}
           {size === "large" &&
             era === "past" &&
@@ -230,7 +227,6 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
           size === "large" ? "p-6 sm:p-8 shadow-2xl" : "p-4 sm:p-6 shadow-lg"
         } shadow-cyan-400/50 relative overflow-hidden max-w-full`}
       >
-        
         {/* Animated Circuit Pattern */}
         <div className="absolute inset-0 opacity-20">
           <div
@@ -244,8 +240,6 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
             }}
           />
         </div>
-
-        
 
         {/* Scan Line Effect */}
         <motion.div
