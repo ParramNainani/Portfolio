@@ -130,6 +130,7 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
   <div className="text-center space-y-6 sm:space-y-8 relative z-10 px-4">
         {/* Main Time Display */}
         <motion.div
+          suppressHydrationWarning
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
@@ -140,6 +141,7 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
 
         {/* Date Display */}
         <motion.div
+          suppressHydrationWarning
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
@@ -219,8 +221,8 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
               era === "past" ? "bg-amber-400/30" : era === "present" ? "bg-emerald-400/30" : "bg-cyan-400/30"
             }`}
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${(i * 39 + 11) % 100}%`,
+              top: `${(i * 67 + 23) % 100}%`,
             }}
             animate={{
               y: [0, -100, 0],
@@ -228,8 +230,8 @@ export function FullScreenClock({ era }: FullScreenClockProps) {
             }}
             transition={{
               repeat: Number.POSITIVE_INFINITY,
-              duration: 3 + Math.random() * 2,
-              delay: Math.random() * 2,
+              duration: 3 + (i % 3),
+              delay: (i * 0.3) % 2,
             }}
           />
         ))}

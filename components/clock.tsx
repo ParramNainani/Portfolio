@@ -255,6 +255,7 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
         />
 
         <motion.div
+          suppressHydrationWarning
           className={`font-mono ${size === "large" ? "text-4xl sm:text-6xl" : "text-3xl sm:text-4xl"} text-cyan-400 tracking-wider text-center font-bold relative z-10 break-words`}
           animate={{
             opacity: [1, 0.8, 1],
@@ -270,7 +271,7 @@ function DigitalClock({ time, size }: { time: Date; size: "normal" | "large" }) 
         </motion.div>
 
         {size === "large" && (
-          <div className="text-base sm:text-lg text-cyan-300 text-center mt-4 font-mono tracking-wide relative z-10">
+          <div suppressHydrationWarning className="text-base sm:text-lg text-cyan-300 text-center mt-4 font-mono tracking-wide relative z-10">
             {formatDate(time)}
           </div>
         )}

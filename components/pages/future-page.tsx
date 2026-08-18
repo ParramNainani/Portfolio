@@ -2,46 +2,54 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Rocket, Brain, Globe2, Zap, Target, Code, Cpu } from "lucide-react"
+import { Rocket, Brain, Globe2, Zap, Target, Code, Cpu, Navigation } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 
 export function FuturePage() {
   const isMobile = useIsMobile()
   const roadmapItems = [
     {
-      quarter: "2024-2026",
-      title: "Academic & Practical AI Mastery",
+      quarter: "2026-2027",
+      title: "NaviiGO Global Scale & Enterprise SaaS",
       description:
-        "Deepening expertise in core AI/ML domains, aligning with advanced subjects like Deep Learning, NLP, and Computer Vision offered at UPES.",
-      icon: Code,
+        "Scaling NaviiGO to become globally recognized as the benchmark in smart navigation and spatial intelligence, alongside launching SankatMochan-AI enterprise platforms worldwide.",
+      icon: Navigation,
       status: "in-progress",
     },
     {
-      quarter: "2026",
-      title: "SankatMochan-AI Capstone Project",
+      quarter: "2027",
+      title: "Enterprise Deployments & Global Hubs",
       description:
-        "Developing SankatMochan-AI into a comprehensive final year project, showcasing advanced AI/ML capabilities and launching it as a SaaS platform.",
-      icon: Brain,
+        "Deploying NaviiGO across international airports, transit networks, campuses, and mega-venues worldwide while spearheading high-impact AI/ML innovations.",
+      icon: Target,
       status: "planning",
     },
     {
-      quarter: "2027",
-      title: "AI/ML Engineer Role",
+      quarter: "2028",
+      title: "Global Industry Standard & Worldwide Reach",
       description:
-        "Secure a challenging role as an AI/ML Engineer at a product-based company, applying academic knowledge to solve real-world problems.",
-      icon: Target,
+        "Solidifying NaviiGO as an internationally recognized household brand and global navigation standard serving millions of users across multiple continents.",
+      icon: Rocket,
       status: "upcoming",
     },
     {
-      quarter: "2028+",
-      title: "SaaS Empire",
-      description: "Build profitable SaaS product serving 10,000+ users with AI-powered life insights, evolving from the initial SankatMochan-AI concept.",
-      icon: Rocket,
+      quarter: "2029+",
+      title: "Autonomous AI & Consciousness Tech Frontier",
+      description:
+        "Building a multi-product deep tech ecosystem fusing autonomous AI systems, spatial computing, and human consciousness enhancements.",
+      icon: Cpu,
       status: "future",
     },
   ]
 
   const dreamProjects = [
+    {
+      title: "NaviiGO Worldwide",
+      description:
+        "A globally recognized, AI-driven spatial navigation ecosystem seamlessly guiding millions through complex international airports, transit hubs, universities, and smart cities.",
+      icon: Navigation,
+      tech: ["Spatial AI", "Computer Vision", "Real-Time Geo-Mapping", "Next.js", "Cloud Infrastructure", "IoT"],
+    },
     {
       title: "SankatMochan-AI Enterprise",
       description:
@@ -54,12 +62,6 @@ export function FuturePage() {
       description: "Full-stack platform that builds Shopify stores using AI and user preferences",
       icon: Globe2,
       tech: ["Next.js", "Shopify API", "AI/ML", "PostgreSQL"],
-    },
-    {
-      title: "Mood-Adaptive Chrome Extension",
-      description: "Browser extension that reads user mood and adapts interface accordingly",
-      icon: Zap,
-      tech: ["Chrome APIs", "Computer Vision", "React", "Firebase"],
     },
     {
       title: "Consciousness-Tech Platform",
@@ -105,13 +107,13 @@ export function FuturePage() {
               y: ["0vh", "110vh"],
             }}
             transition={{
-              duration: 3 + Math.random() * (isMobile ? 1.5 : 2),
+              duration: 3 + ((i % 4) * (isMobile ? 0.5 : 0.7)),
               repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 2,
+              delay: (i * 0.3) % 2,
               ease: "linear",
             }}
           >
-            {Array.from({ length: 12 }, () => String.fromCharCode(0x30a0 + Math.random() * 96)).join("")}
+            {Array.from({ length: 12 }, (_, j) => String.fromCharCode(0x30a0 + ((i * 13 + j * 5) % 96))).join("")}
           </motion.div>
         ))}
       </div>
@@ -272,9 +274,10 @@ export function FuturePage() {
             <Rocket className="w-12 h-12 sm:w-16 sm:h-16 text-cyan-400 mx-auto mb-4 sm:mb-6" />
             <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6 font-mono">MISSION_STATEMENT.exe</h3>
             <p className="text-gray-300 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed max-w-4xl mx-auto">
-              To become a thought leader in the AI + Human Behavior space, building intelligent SaaS platforms that fuse
-              artificial intelligence with human consciousness. By 2026, launch a profitable SaaS product serving
-              thousands while leading a team of passionate creators who believe technology can enhance human potential.
+              To establish NaviiGO as a globally recognized leader and benchmark in spatial intelligence and navigation,
+              while engineering pioneering platforms that fuse artificial intelligence with human consciousness. Scaling
+              transformative SaaS solutions to empower millions worldwide and leading visionary teams that elevate human
+              potential through code.
             </p>
             <div className="flex flex-wrap justify-center gap-4 sm:space-x-6">
               <motion.a

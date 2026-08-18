@@ -175,18 +175,18 @@ export default function HomePage() {
                 key={i}
                 className="absolute w-1 h-1 bg-amber-600/30 rounded-full"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: `${(i * 37 + 13) % 100}%`,
+                  top: `${(i * 59 + 27) % 100}%`,
                 }}
                 animate={{
                   y: [0, -30, 0],
-                  x: [0, Math.random() * 20 - 10, 0],
+                  x: [0, ((i % 5) - 2) * 5, 0],
                   opacity: [0.3, 0.8, 0.3],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 3,
+                  duration: 4 + (i % 4),
                   repeat: Number.POSITIVE_INFINITY,
-                  delay: Math.random() * 2,
+                  delay: (i * 0.4) % 2,
                 }}
               />
             ))}
@@ -249,7 +249,7 @@ export default function HomePage() {
                   opacity: [0.3, 0.8, 0.3],
                 }}
                 transition={{
-                  duration: 6 + Math.random() * 4,
+                  duration: 6 + (i % 4),
                   repeat: Number.POSITIVE_INFINITY,
                   delay: i * 0.5,
                 }}
@@ -273,7 +273,7 @@ export default function HomePage() {
                   y: [0, -20, 0],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 2,
+                  duration: 4 + (i % 3),
                   repeat: Number.POSITIVE_INFINITY,
                   delay: i * 0.3,
                 }}
@@ -286,8 +286,8 @@ export default function HomePage() {
                 key={i}
                 className="absolute w-1 h-1 bg-emerald-400/60 rounded-full"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: `${(i * 47 + 17) % 100}%`,
+                  top: `${(i * 83 + 31) % 100}%`,
                 }}
                 animate={{
                   scale: [0, 1, 0],
@@ -296,7 +296,7 @@ export default function HomePage() {
                 transition={{
                   duration: 2,
                   repeat: Number.POSITIVE_INFINITY,
-                  delay: Math.random() * 3,
+                  delay: (i * 0.25) % 3,
                 }}
               />
             ))}
@@ -345,13 +345,13 @@ export default function HomePage() {
                     y: ["0vh", "110vh"],
                   }}
                   transition={{
-                    duration: 2 + Math.random() * 3,
+                    duration: 2 + (i % 4),
                     repeat: Number.POSITIVE_INFINITY,
-                    delay: Math.random() * 2,
+                    delay: (i * 0.3) % 2,
                     ease: "linear",
                   }}
                 >
-                  {Array.from({ length: 15 }, () => String.fromCharCode(0x30a0 + Math.random() * 96)).join("")}
+                  {Array.from({ length: 15 }, (_, j) => String.fromCharCode(0x30a0 + ((i * 17 + j * 7) % 96))).join("")}
                 </motion.div>
               ))}
             </div>
@@ -419,7 +419,7 @@ export default function HomePage() {
                     ],
                   }}
                   transition={{
-                    duration: 3 + Math.random() * 2,
+                    duration: 3 + (i % 3),
                     repeat: Number.POSITIVE_INFINITY,
                     delay: i * 0.2,
                   }}
@@ -458,7 +458,7 @@ export default function HomePage() {
               transition={{
                 duration: 0.1,
                 repeat: Number.POSITIVE_INFINITY,
-                repeatDelay: 2 + Math.random() * 3,
+                repeatDelay: 3.5,
               }}
             />
 

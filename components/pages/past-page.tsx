@@ -2,14 +2,14 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { GraduationCap, Code, Award, Star, Zap } from "lucide-react"
+import { GraduationCap, Code, Award, Star, Zap, Brain, Trophy } from "lucide-react"
 
 export function PastPage() {
   const [showAbout, setShowAbout] = useState(false)
   const aboutParagraphs = [
     "In the bustling streets of New Delhi, a curious mind discovered the magic of code in 2020. What started as simple Python scripts evolved into a journey that would bridge the ancient wisdom of Vedic astrology with cutting-edge artificial intelligence.",
-    "From building image sorters with OpenCV to launching Shopify empires, from pursuing B.Tech in Computer Science to creating AI engines that decode planetary movements - this is the story of transformation through technology.",
-    "Every line of code written in the past was a stepping stone to the AI-powered future we're building today.",
+    "From building image sorters with OpenCV to launching Shopify empires, from qualifying for the Smart India Hackathon Grand Finale to founding NaviiGO and creating AI engines that decode planetary movements - this is the story of transformation through technology.",
+    "Every line of code and milestone forged in the past became the bedrock for the globally recognized AI-powered future we're engineering today.",
   ]
   const timelineEvents = [
     {
@@ -46,8 +46,24 @@ export function PastPage() {
       title: "AI Meets Ancient Wisdom",
       description:
         "Built SankatMochan-AI - a revolutionary engine combining Vedic astrology with AI for real-time life predictions",
-      icon: GraduationCap,
+      icon: Brain,
       color: "bg-amber-950",
+    },
+    {
+      year: "2025",
+      title: "SIH Grand Finale & Founding NaviiGO",
+      description:
+        "Founded NaviiGO to revolutionize smart indoor navigation and qualified for the prestigious Smart India Hackathon (SIH) Grand Finale while engineering deep learning vision architectures.",
+      icon: Trophy,
+      color: "bg-stone-800",
+    },
+    {
+      year: "2026",
+      title: "B.Tech Graduation & Enterprise Horizon",
+      description:
+        "Completed B.Tech in Computer Science Engineering with academic excellence, advancing SankatMochan-AI and laying the groundwork to take NaviiGO global.",
+      icon: GraduationCap,
+      color: "bg-stone-900",
     },
   ]
 
@@ -94,7 +110,7 @@ export function PastPage() {
             {showAbout ? "Show less" : "Show more"}
           </button>
           <motion.a
-            href="https://drive.google.com/file/d/1wifQg0kPMvbeGwFIOPPwnJaA9iw0Qygq/view?usp=sharing"
+            href="https://drive.google.com/file/d/1sjTNCwuFz_uQZsNgd5EXJJq9OccrBtym/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(217, 119, 6, 0.3)" }}
