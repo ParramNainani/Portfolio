@@ -36,8 +36,8 @@ export function PastPage() {
     },
     {
       year: "2023",
-      title: "Certified Shopify Developer",
-      description: "Earned a Shopify developer certification and kept building client stores",
+      title: "Shopify Client Work",
+      description: "Built and launched Shopify stores for clients, earning a recommendation letter from Apna Camphor",
 
       icon: Award,
       color: "bg-amber-900",
