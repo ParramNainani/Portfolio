@@ -38,6 +38,15 @@ export function PresentPage() {
       link: "https://github.com/ParramNainani/Project-Backend",
     },
     {
+      title: "Kshetrajna: Local PC-Health & File-Intelligence Assistant",
+      description:
+        "Offline Windows assistant that watches app activity and memory pressure, explains each recommendation and acts only after approval: priority trials, memory trim, file quarantine and restore. Propose-consent-execute action API with expiry, replay protection, journals and crash recovery; 573-test CI suite; native x64 and ARM64 (Snapdragon) bundles.",
+      tech: ["Python", "Win32 APIs", "SQLite", "GitHub Actions", "Windows on ARM"],
+      status: "Ongoing",
+      highlight: true,
+      link: "https://github.com/Team-SankatMochan/KSHETRAJNA-OS",
+    },
+    {
       title: "Kshetrajna Drift: Local AI Filing Agent",
       description:
         "Local open-weight AI agent (Llama 3.1 8B via Ollama) that sorts loose files by purpose, explains each choice and moves only approved files. SHA-256 re-checks, a SQLite intent journal with undo and crash recovery, expiring single-use approvals, 31 tests.",
