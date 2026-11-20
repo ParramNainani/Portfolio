@@ -1,18 +1,9 @@
 import { ApprovalRequest } from "@/components/site/approval-request"
+import { ActionLoop } from "@/components/site/action-loop"
+import { Hero } from "@/components/site/hero"
 
 const RESUME = "/Parram_Nainani_Resume.pdf"
 const EMAIL = "parramnainani@gmail.com"
-
-const loop = [
-  { step: "Observe" },
-  { step: "Diagnose" },
-  { step: "Explain" },
-  { step: "Approve", tone: "is-consent" },
-  { step: "Act" },
-  { step: "Verify", tone: "is-verified" },
-  { step: "Measure" },
-  { step: "Recover" },
-]
 
 const projects = [
   {
@@ -139,40 +130,7 @@ export default function HomePage() {
       </header>
 
       <main id="top">
-        {/* Hero */}
-        <section className="mx-auto grid max-w-[1160px] gap-12 px-5 pb-20 pt-10 sm:px-8 lg:grid-cols-[1.45fr_1fr] lg:items-center lg:pb-28 lg:pt-16">
-          <div>
-            <h1 className="display text-[2.7rem] sm:text-[4rem] lg:text-[4.5rem]">
-              I build software that asks before it acts.
-            </h1>
-            <p className="measure mt-7 text-lg sm:text-xl">
-              I’m Parram Nainani, a computer science student at UPES and the founder of NaviiGo. I make local AI
-              tools, agents and web products that explain what they want to do, wait for your approval, and can be
-              undone.
-            </p>
-            <p className="muted mt-4">
-              B.Tech CSE (AI and ML), graduating 2028. Based in New Delhi. Open to software engineering internships.
-            </p>
-            <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-[0.98rem]" aria-label="Links">
-              <li>
-                <a className="text-link" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a className="text-link" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a className="text-link" href={`mailto:${EMAIL}`}>
-                  {EMAIL}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <ApprovalRequest />
-        </section>
+        <Hero />
 
         {/* Work */}
         <section id="work" className="rule-top scroll-mt-4">
@@ -215,16 +173,7 @@ export default function HomePage() {
 
               <div className="self-start rounded-[18px] bg-[var(--paper)] p-6 sm:p-8">
                 <p className="font-semibold">How every action moves through Kshetrajna</p>
-                <ol className="loop mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                  {loop.map((s) => (
-                    <li
-                      key={s.step}
-                      className={`rounded-xl border border-[var(--rule)] px-3 py-3 font-semibold ${s.tone ?? ""}`}
-                    >
-                      {s.step}
-                    </li>
-                  ))}
-                </ol>
+                <ActionLoop />
                 <p className="muted mt-6 text-[0.97rem]">
                   Nothing reaches the Act step without an explicit approval, and every action keeps a route back. The
                   same rule runs through Kshetrajna Drift and ReVoice below.
@@ -350,33 +299,43 @@ export default function HomePage() {
 
         {/* Contact */}
         <section id="contact" className="bg-[var(--graphite)] text-[var(--fog)]">
-          <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:py-28">
-            <p className="text-lg">Hiring for a software engineering internship, or building something with agents?</p>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="display mt-5 block break-words text-[1.9rem] text-white underline decoration-[var(--amber)] decoration-[3px] underline-offset-[0.18em] hover:decoration-[5px] sm:text-[3.4rem] lg:text-[4.2rem]"
-            >
-              {EMAIL}
-            </a>
-            <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[1rem]" aria-label="More links">
-              <li>
-                <a className="underline hover:no-underline" href={RESUME} target="_blank" rel="noopener">
-                  Résumé (PDF)
-                </a>
-              </li>
-              <li>
-                <a className="underline hover:no-underline" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a className="underline hover:no-underline" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
-            <p className="mt-16 text-sm text-[#a7b0ba]">© 2026 Parram Nainani. Built with Next.js.</p>
+          <div className="mx-auto grid max-w-[1160px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:py-28">
+            <div>
+              <p className="text-lg">Hiring for a software engineering internship, or building something with agents?</p>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="title mt-5 block break-words text-[1.7rem] text-white underline decoration-[var(--amber)] decoration-[3px] underline-offset-[0.18em] hover:decoration-[5px] sm:text-[2.4rem]"
+              >
+                {EMAIL}
+              </a>
+              <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[1rem]" aria-label="More links">
+                <li>
+                  <a className="underline hover:no-underline" href={RESUME} target="_blank" rel="noopener">
+                    Résumé (PDF)
+                  </a>
+                </li>
+                <li>
+                  <a className="underline hover:no-underline" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
+                    GitHub
+                  </a>
+                </li>
+                <li>
+                  <a className="underline hover:no-underline" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
+                    LinkedIn
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <ApprovalRequest
+              title="Interview Parram for a software engineering role"
+              why="He ships agents that explain themselves and ask first, with tests to prove it, and is open to software engineering internships."
+              effect="Your email app opens a message to parramnainani@gmail.com. Nothing is sent until you press send."
+              approvedNote="Your email app should be opening now. If it isn't, write to parramnainani@gmail.com."
+              approveHref={`mailto:${EMAIL}?subject=Interview%20with%20Parram%20Nainani`}
+              secondary={{ label: "Open résumé", href: RESUME }}
+            />
           </div>
+          <p className="mx-auto max-w-[1160px] px-5 pb-10 text-sm text-[#a7b0ba] sm:px-8">© 2026 Parram Nainani. Built with Next.js, Three.js and GSAP.</p>
         </section>
       </main>
     </div>
