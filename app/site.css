@@ -1,0 +1,229 @@
+/* Portfolio design tokens and typography.
+   Colour carries state, the way it does in Parram's projects:
+   amber = proposed and waiting for approval, green = approved and done. */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url("/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --fog: #edf0f3;
+  --paper: #ffffff;
+  --graphite: #1b1f24;
+  --slate: #59636e;
+  --rule: #cfd5db;
+  --amber: #e8a317;
+  --amber-soft: #fbefd2;
+  --verified: #1f7a4d;
+  --verified-soft: #dcefe3;
+  --link: #2e43c9;
+}
+
+.site {
+  background: var(--fog);
+  color: var(--graphite);
+  font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  font-stretch: 100%;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-feature-settings: "tnum" 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site ::selection {
+  background: var(--amber-soft);
+}
+
+/* Display type: Archivo pushed wide and heavy, so the width axis does the shouting. */
+.display {
+  font-stretch: 125%;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+}
+
+.title {
+  font-stretch: 118%;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.condensed {
+  font-stretch: 82%;
+}
+
+.muted {
+  color: var(--slate);
+}
+
+.measure {
+  max-width: 64ch;
+}
+
+.site a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.text-link {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.text-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.site :focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.rule-top {
+  border-top: 1px solid var(--rule);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.2;
+  transition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.btn-primary {
+  background: var(--graphite);
+  color: var(--paper);
+}
+
+.btn-primary:hover {
+  background: #000;
+}
+
+.btn-quiet {
+  border: 1px solid var(--rule);
+  color: var(--graphite);
+  background: transparent;
+}
+
+.btn-quiet:hover {
+  border-color: var(--graphite);
+}
+
+/* The approval request: the one loud element on the page. */
+.request {
+  background: var(--paper);
+  border-radius: 18px;
+  box-shadow: 0 1px 0 var(--rule), 0 24px 60px -32px rgba(27, 31, 36, 0.45);
+}
+
+.request[data-state="pending"] .request-band {
+  background: var(--amber);
+}
+
+.request[data-state="approved"] .request-band {
+  background: var(--verified);
+}
+
+.request-band {
+  height: 6px;
+  border-radius: 18px 18px 0 0;
+  transition: background-color 300ms ease;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-pending {
+  background: var(--amber-soft);
+  color: #6b4a00;
+}
+
+.status-approved {
+  background: var(--verified-soft);
+  color: var(--verified);
+}
+
+.status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.request[data-state="pending"] .status-dot {
+  animation: waiting 1.6s ease-in-out infinite;
+}
+
+@keyframes waiting {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* The Kshetrajna loop: a real sequence, so it is numbered. */
+.loop {
+  counter-reset: step;
+}
+
+.loop li {
+  counter-increment: step;
+}
+
+.loop li::before {
+  content: counter(step);
+  font-stretch: 82%;
+  font-weight: 600;
+  color: var(--slate);
+  margin-right: 0.4rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.loop .is-consent {
+  background: var(--amber-soft);
+  border-color: var(--amber);
+}
+
+.loop .is-verified {
+  background: var(--verified-soft);
+  border-color: var(--verified);
+}
+
+.facts li {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .request[data-state="pending"] .status-dot {
+    animation: none;
+  }
+  .request-band,
+  .btn {
+    transition: none;
+  }
+}

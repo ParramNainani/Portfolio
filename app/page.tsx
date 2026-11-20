@@ -1,594 +1,384 @@
-"use client"
+import { ApprovalRequest } from "@/components/site/approval-request"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Clock } from "@/components/clock"
-import { TimeLever } from "@/components/time-lever"
-import { FullScreenClock } from "@/components/full-screen-clock"
-import { PastPage } from "@/components/pages/past-page"
-import { PresentPage } from "@/components/pages/present-page"
-import { FuturePage } from "@/components/pages/future-page"
-import { Footer } from "@/components/footer"
-import { useIsMobile } from "@/hooks/use-mobile"
+const RESUME = "/Parram_Nainani_Resume.pdf"
+const EMAIL = "parramnainani@gmail.com"
 
-export type TimeEra = "past" | "present" | "future"
+const loop = [
+  { step: "Observe" },
+  { step: "Diagnose" },
+  { step: "Explain" },
+  { step: "Approve", tone: "is-consent" },
+  { step: "Act" },
+  { step: "Verify", tone: "is-verified" },
+  { step: "Measure" },
+  { step: "Recover" },
+]
+
+const projects = [
+  {
+    name: "Kshetrajna Drift",
+    year: "2026",
+    what: "A local AI agent for messy folders. Llama 3.1 runs on your own machine, suggests where each loose file belongs and says why, then moves only the files you approve.",
+    proof: ["31 automated tests", "SHA-256 re-checks before every move", "Undo journal with crash recovery"],
+    stack: "Python, Llama 3.1 8B via Ollama, SQLite",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/kshetrajna-drift" }],
+  },
+  {
+    name: "ReVoice",
+    year: "2026",
+    what: "A voice support agent that copes with being interrupted. Every request gets a generation ID, so when you change your mind mid-sentence, answers to the old request are thrown away instead of spoken.",
+    proof: ["Built for the Rime hackathon", "Acceptance test replays a real interruption"],
+    stack: "TypeScript, LiveKit Agents, Deepgram, OpenAI, React",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/DataForge" }],
+  },
+  {
+    name: "Support-triage RL environment",
+    year: "2026",
+    what: "An OpenEnv environment where an LLM agent decides whether to resolve, investigate or escalate customer tickets, graded at three difficulty levels.",
+    proof: ["Rewards from 0 to 1 per decision", "Dockerised for Hugging Face Spaces"],
+    stack: "Python, OpenEnv, Docker, Gradio",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/OpenENV-ScalerSchool" }],
+  },
+  {
+    name: "Finance dashboard backend",
+    year: "2026",
+    what: "A REST API for a finance dashboard with three roles, filterable transaction records and summary endpoints for totals, daily trends and categories.",
+    proof: ["JWT auth and role-based access", "Zod validation and Swagger docs"],
+    stack: "Node.js, Express, PostgreSQL, Prisma, Docker",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/Project-Backend" }],
+  },
+  {
+    name: "NaviiGo",
+    year: "2025 – now",
+    what: "The travel-tech company I founded and run. naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one workspace.",
+    proof: ["Team of 5–7", "MeitY GENESIS Entrepreneur-in-Residence, Cohort 2"],
+    stack: "Next.js on Vercel",
+    links: [{ label: "Visit naviigo.in", href: "https://naviigo.in" }],
+  },
+]
+
+const experience = [
+  {
+    when: "Dec 2025 – now",
+    role: "Founder and CEO",
+    org: "NaviiGo",
+    detail:
+      "Started and incorporated the company, lead a team of 5–7, and build the website: flight trip types, rail timetables, hotel links and safer booking handoffs.",
+  },
+  {
+    when: "Jan 2026 – now",
+    role: "Web developer",
+    org: "COE Nexus",
+    detail:
+      "Built and maintain 7+ live event and media sites in React, Vite, Firebase and GSAP, including registration and nomination flows for summits and awards.",
+    links: [
+      { label: "GCC Catalyst Summit", href: "https://gcc-catalyst-summit.coe-nexus.com/" },
+      { label: "COE Awards Hyderabad", href: "https://coe-awards-hyderabad.coe-nexus.com/" },
+    ],
+  },
+  {
+    when: "Sep – Nov 2025",
+    role: "Software developer intern (contract)",
+    org: "BinaryKeeda",
+    detail: "Built responsive, accessible web apps in React, Tailwind CSS and Firebase from design-system components.",
+  },
+  {
+    when: "May – Oct 2025",
+    role: "Software developer",
+    org: "NetStratix Technologies",
+    detail: "Developed and maintained cross-platform Flutter and Firebase mobile apps with the backend and design teams.",
+  },
+]
+
+const skills = [
+  { group: "Languages", items: "Python, TypeScript, JavaScript, Java, Dart, SQL" },
+  { group: "AI and agents", items: "LLM agents, Ollama, LiveKit Agents, RAG, PyTorch, scikit-learn" },
+  { group: "Web and back end", items: "React, Next.js, Node.js, Express, PostgreSQL, Prisma, SQLite, Firebase" },
+  { group: "Tools", items: "Git, GitHub Actions, Docker, Vercel, Flutter, GSAP, WebGL" },
+]
+
+function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <h2 id={id} tabIndex={-1} className="title text-[2rem] sm:text-[2.6rem] outline-none">
+      {children}
+    </h2>
+  )
+}
 
 export default function HomePage() {
-  const [currentEra, setCurrentEra] = useState<TimeEra>("present")
-  const isMobile = useIsMobile()
-
-  const dustCount = isMobile ? 8 : 25
-  const presentShapeCount = isMobile ? 5 : 12
-  const presentBubbleCount = isMobile ? 4 : 8
-  const presentParticleCount = isMobile ? 12 : 30
-  const futureRainCount = isMobile ? 12 : 30
-  const futureHologramCount = isMobile ? 8 : 15
-
-  const renderCurrentPage = () => {
-    switch (currentEra) {
-      case "past":
-        return <PastPage key="past" />
-      case "present":
-        return <PresentPage key="present" />
-      case "future":
-        return <FuturePage key="future" />
-      default:
-        return <PresentPage key="present" />
-    }
-  }
-
-  const getBackgroundClass = () => {
-    switch (currentEra) {
-      case "past":
-        return "bg-gradient-to-b from-amber-50 to-amber-100 relative overflow-hidden"
-      case "present":
-        return "bg-gradient-to-b from-emerald-50 to-teal-100 relative overflow-hidden"
-      case "future":
-        return "bg-gradient-to-b from-slate-900 to-slate-800 relative overflow-hidden"
-      default:
-        return "bg-gradient-to-b from-emerald-50 to-teal-100 relative overflow-hidden"
-    }
-  }
-
   return (
-    <div className="relative overflow-x-hidden">
-      {/* Hero Section - Clock and Lever Only */}
-      <section
-        className={`min-h-[100svh] w-full flex flex-col items-center justify-center px-4 sm:px-6 transition-all duration-1000 ${getBackgroundClass()}`}
+    <div className="site min-h-screen">
+      <a
+        href="#work"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2"
       >
-        {/* Giant Name Backdrop (positioned above the clock) */}
-        <div className="absolute inset-0 flex justify-center items-start pt-[8vh] md:pt-[10vh] pointer-events-none select-none">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 0.15, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className={`font-extrabold uppercase tracking-[-0.04em] text-center leading-none drop-shadow-sm bg-clip-text text-transparent 
-              ${
-                currentEra === "past"
-                  ? "bg-gradient-to-b from-amber-900 to-amber-700"
-                  : currentEra === "present"
-                    ? "bg-gradient-to-b from-emerald-900 to-emerald-700"
-                    : "bg-gradient-to-b from-cyan-500 to-cyan-300"
-              }
-            `}
-            style={{ fontSize: "clamp(2.75rem, 16vw, 12rem)", lineHeight: 1 }}
-          >
-            PARRAM NAINANI
-          </motion.h1>
-        </div>
+        Skip to work
+      </a>
 
-        {/* Floating Quotes (hidden on phones) */}
-        <div className="absolute inset-x-0 bottom-8 sm:bottom-14 px-4 pointer-events-none select-none">
-          <div className="max-w-7xl mx-auto">
-            <div className="hidden sm:flex items-start justify-between gap-8">
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className={`${
-                  currentEra === "past"
-                    ? "text-amber-900/90"
-                    : currentEra === "present"
-                      ? "text-emerald-900/90"
-                      : "text-cyan-300/90"
-                } text-sm sm:text-base max-w-sm font-medium`}
-              >
-                Hi, I’m Parram: a software engineer building full-stack and AI/ML products, and founder of
-                NaviiGo.
-              </motion.p>
+      <header className="mx-auto flex max-w-[1160px] items-center justify-between gap-6 px-5 py-5 sm:px-8">
+        <a href="#top" className="title text-lg no-underline">
+          Parram Nainani
+        </a>
+        <nav aria-label="Sections" className="flex items-center gap-6 text-[0.95rem]">
+          <a href="#work" className="hidden hover:underline md:inline">
+            Work
+          </a>
+          <a href="#experience" className="hidden hover:underline md:inline">
+            Experience
+          </a>
+          <a href="#research" className="hidden hover:underline md:inline">
+            Research
+          </a>
+          <a href="#contact" className="hidden hover:underline md:inline">
+            Contact
+          </a>
+          <a href={RESUME} target="_blank" rel="noopener" className="btn btn-quiet">
+            Résumé (PDF)
+          </a>
+        </nav>
+      </header>
 
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.45 }}
-                className={`${
-                  currentEra === "past"
-                    ? "text-amber-900/90"
-                    : currentEra === "present"
-                      ? "text-emerald-900/90"
-                      : "text-cyan-300/90"
-                } text-sm sm:text-base max-w-sm text-right font-medium`}
-              >
-                B.Tech CSE (AI &amp; ML) at UPES. Shipping React, Next.js, Node.js and Flutter apps, with research in
-                vision transformers.
-              </motion.p>
-            </div>
+      <main id="top">
+        {/* Hero */}
+        <section className="mx-auto grid max-w-[1160px] gap-12 px-5 pb-20 pt-10 sm:px-8 lg:grid-cols-[1.45fr_1fr] lg:items-center lg:pb-28 lg:pt-16">
+          <div>
+            <h1 className="display text-[2.7rem] sm:text-[4rem] lg:text-[4.5rem]">
+              I build software that asks before it acts.
+            </h1>
+            <p className="measure mt-7 text-lg sm:text-xl">
+              I’m Parram Nainani, a computer science student at UPES and the founder of NaviiGo. I make local AI
+              tools, agents and web products that explain what they want to do, wait for your approval, and can be
+              undone.
+            </p>
+            <p className="muted mt-4">
+              B.Tech CSE (AI and ML), graduating 2028. Based in New Delhi. Open to software engineering internships.
+            </p>
+            <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-[0.98rem]" aria-label="Links">
+              <li>
+                <a className="text-link" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a className="text-link" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a className="text-link" href={`mailto:${EMAIL}`}>
+                  {EMAIL}
+                </a>
+              </li>
+            </ul>
           </div>
-        </div>
-        {/* PAST - Medieval Manuscript Vibes */}
-        {currentEra === "past" && (
-          <>
-            {/* Parchment Background with Texture */}
-            <div className="absolute inset-0 opacity-40 pointer-events-none overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-200/60 via-yellow-100/40 to-amber-300/60" />
-              {/* Multiple Coffee Stains */}
-              <div className="absolute top-20 left-16 w-32 h-32 bg-amber-800/30 rounded-full blur-md" />
-              <div className="absolute bottom-32 right-20 w-24 h-24 bg-amber-900/25 rounded-full blur-sm" />
-              <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-amber-700/35 rounded-full blur-sm" />
-              <div className="absolute top-1/3 right-1/3 w-20 h-20 bg-amber-600/20 rounded-full blur-lg" />
-              {/* Ink Splatters */}
-              <div className="absolute top-1/4 right-1/4 w-12 h-12 bg-slate-800/40 rounded-full blur-[3px]" />
-              <div className="absolute bottom-1/4 left-1/4 w-8 h-8 bg-slate-700/35 rounded-full blur-[2px]" />
-              <div className="absolute top-3/4 right-1/2 w-6 h-6 bg-slate-600/30 rounded-full blur-[1px]" />
-            </div>
+          <ApprovalRequest />
+        </section>
 
-            {/* Torn Paper Edges - More Dramatic */}
-            <div
-              className="absolute top-0 left-0 w-full h-12 bg-gradient-to-b from-amber-300/80 to-transparent"
-              style={{ clipPath: "polygon(0 0, 100% 0, 92% 100%, 8% 100%)" }}
-            />
-            <div
-              className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-amber-300/80 to-transparent"
-              style={{ clipPath: "polygon(8% 0, 92% 0, 100% 100%, 0 100%)" }}
-            />
-            <div
-              className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-amber-300/60 to-transparent max-sm:hidden"
-              style={{ clipPath: "polygon(0 0, 100% 5%, 100% 95%, 0 100%)" }}
-            />
-            <div
-              className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-amber-300/60 to-transparent max-sm:hidden"
-              style={{ clipPath: "polygon(0 5%, 100% 0, 100% 100%, 0 95%)" }}
-            />
+        {/* Work */}
+        <section id="work" className="rule-top scroll-mt-4">
+          <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:py-24">
+            <SectionHeading id="work-heading">Selected work</SectionHeading>
+            <p className="measure muted mt-3">
+              Things I built outside of client work, with source you can read. Company projects are under Experience.
+            </p>
 
-            {/* Vintage Stamps Collection */}
-            <div className="absolute top-12 right-12 w-20 h-24 border-4 border-amber-800/50 bg-amber-100/70 rotate-12 flex flex-col items-center justify-center shadow-lg max-sm:hidden">
-              <span className="text-amber-800/70 text-xs font-bold">VINTAGE</span>
-              <span className="text-amber-700/60 text-[8px]">1885</span>
-            </div>
-            <div className="absolute top-20 right-40 w-16 h-20 border-3 border-red-800/40 bg-red-100/60 -rotate-6 flex items-center justify-center shadow-md max-sm:hidden">
-              <span className="text-red-800/60 text-[10px] font-bold">CLASSIC</span>
-            </div>
+            {/* Lead project */}
+            <article className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.05fr]" aria-labelledby="kshetrajna">
+              <div>
+                <p className="muted text-[0.95rem]">2026, lead project</p>
+                <h3 id="kshetrajna" className="display mt-2 text-[2.4rem] sm:text-[3.2rem]">
+                  Kshetrajna
+                </h3>
+                <p className="measure mt-5 text-lg">
+                  A private assistant for Windows PCs. It watches app activity and memory pressure, explains what it
+                  would change and why, and only acts once you approve: closing or reprioritising apps, trimming
+                  memory, moving files to a quarantine you can restore from.
+                </p>
+                <ul className="facts mt-6 space-y-1.5">
+                  <li>573 automated tests, with CI on Linux and native Windows</li>
+                  <li>Approvals expire, can’t be replayed, and every action is journaled for recovery</li>
+                  <li>Reproducible builds, with Windows bundles for x64 and ARM64 (Snapdragon)</li>
+                  <li>48 commits over about a month, roughly 12,900 lines of Python with no runtime dependencies</li>
+                </ul>
+                <p className="muted mt-5 text-[0.95rem]">Python, Win32 APIs, SQLite, GitHub Actions</p>
+                <p className="mt-5">
+                  <a
+                    className="text-link"
+                    href="https://github.com/Team-SankatMochan/KSHETRAJNA-OS"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Source on GitHub
+                  </a>
+                </p>
+              </div>
 
-            {/* Wax Seals */}
-            <div className="absolute bottom-16 left-12 w-16 h-16 bg-red-800/50 rounded-full flex items-center justify-center shadow-xl">
-              <div className="w-12 h-12 bg-red-900/70 rounded-full flex items-center justify-center">
-                <span className="text-red-100/80 text-xs font-bold">W</span>
+              <div className="self-start rounded-[18px] bg-[var(--paper)] p-6 sm:p-8">
+                <p className="font-semibold">How every action moves through Kshetrajna</p>
+                <ol className="loop mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  {loop.map((s) => (
+                    <li
+                      key={s.step}
+                      className={`rounded-xl border border-[var(--rule)] px-3 py-3 font-semibold ${s.tone ?? ""}`}
+                    >
+                      {s.step}
+                    </li>
+                  ))}
+                </ol>
+                <p className="muted mt-6 text-[0.97rem]">
+                  Nothing reaches the Act step without an explicit approval, and every action keeps a route back. The
+                  same rule runs through Kshetrajna Drift and ReVoice below.
+                </p>
+              </div>
+            </article>
+
+            {/* Other projects */}
+            <ul className="mt-16">
+              {projects.map((p) => (
+                <li key={p.name} className="rule-top grid gap-4 py-8 md:grid-cols-[minmax(0,17rem)_1fr_auto] md:gap-10">
+                  <div>
+                    <h3 className="title text-[1.45rem]">{p.name}</h3>
+                    <p className="muted mt-1 text-[0.95rem]">{p.year}</p>
+                  </div>
+                  <div className="measure">
+                    <p>{p.what}</p>
+                    <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[0.95rem]">
+                      {p.proof.map((f) => (
+                        <li key={f} className="font-medium">
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="muted mt-2 text-[0.95rem]">{p.stack}</p>
+                  </div>
+                  <div className="md:text-right">
+                    {p.links.map((l) => (
+                      <a key={l.href} className="text-link" href={l.href} target="_blank" rel="noopener">
+                        {l.label}
+                      </a>
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Experience */}
+        <section id="experience" className="rule-top bg-[var(--paper)]">
+          <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:py-24">
+            <SectionHeading id="experience-heading">Experience</SectionHeading>
+            <ol className="mt-10">
+              {experience.map((e) => (
+                <li key={e.org} className="rule-top grid gap-2 py-7 md:grid-cols-[12rem_1fr] md:gap-10">
+                  <p className="muted condensed text-[1rem] font-semibold">{e.when}</p>
+                  <div className="measure">
+                    <h3 className="title text-[1.3rem]">
+                      {e.role}, {e.org}
+                    </h3>
+                    <p className="mt-2">{e.detail}</p>
+                    {e.links ? (
+                      <p className="mt-2 flex flex-wrap gap-x-5 text-[0.95rem]">
+                        {e.links.map((l) => (
+                          <a key={l.href} className="text-link" href={l.href} target="_blank" rel="noopener">
+                            {l.label}
+                          </a>
+                        ))}
+                      </p>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div className="rule-top grid gap-2 py-7 md:grid-cols-[12rem_1fr] md:gap-10">
+              <p className="muted condensed text-[1rem] font-semibold">2024 – 2028</p>
+              <div>
+                <h3 className="title text-[1.3rem]">B.Tech, Computer Science and Engineering (AI and ML), UPES</h3>
+                <p className="mt-2">CGPA 8.7 out of 10, Dehradun.</p>
               </div>
             </div>
-            <div className="absolute bottom-32 left-32 w-12 h-12 bg-blue-800/40 rounded-full flex items-center justify-center shadow-lg">
-              <div className="w-8 h-8 bg-blue-900/60 rounded-full" />
-            </div>
-
-            {/* Floating Dust Particles */}
-            {[...Array(dustCount)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-amber-600/30 rounded-full"
-                style={{
-                  left: `${(i * 37 + 13) % 100}%`,
-                  top: `${(i * 59 + 27) % 100}%`,
-                }}
-                animate={{
-                  y: [0, -30, 0],
-                  x: [0, ((i % 5) - 2) * 5, 0],
-                  opacity: [0.3, 0.8, 0.3],
-                }}
-                transition={{
-                  duration: 4 + (i % 4),
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: (i * 0.4) % 2,
-                }}
-              />
-            ))}
-
-            {/* Quill Pen Animation */}
-            <motion.div
-              className="absolute bottom-20 right-16 w-32 h-2 bg-amber-800/60 rounded-full origin-left"
-              animate={{ rotate: [0, 5, -2, 0] }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-            >
-              <div className="absolute -right-2 -top-1 w-4 h-4 bg-amber-900/70 rounded-full" />
-            </motion.div>
-          </>
-        )}
-
-        {/* PRESENT - Ultra Modern Tech Vibes */}
-        {currentEra === "present" && (
-          <>
-            {/* Dynamic Grid System */}
-            <div className="absolute inset-0 opacity-15">
-              <motion.div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `
-                  linear-gradient(rgba(16, 185, 129, 0.3) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(16, 185, 129, 0.3) 1px, transparent 1px)
-                `,
-                  backgroundSize: "50px 50px",
-                }}
-                animate={{
-                  backgroundPosition: ["0px 0px", "50px 50px"],
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "linear",
-                }}
-              />
-            </div>
-
-            {/* Floating Geometric Shapes */}
-            {[...Array(presentShapeCount)].map((_, i) => (
-              <motion.div
-                key={i}
-                className={`absolute ${
-                  i % 3 === 0
-                    ? "w-4 h-4 bg-emerald-400/40 rounded-full"
-                    : i % 3 === 1
-                      ? "w-6 h-6 bg-teal-400/30 rotate-45"
-                      : "w-3 h-8 bg-emerald-500/35 rounded-full"
-                }`}
-                style={{
-                  left: `${15 + i * 7}%`,
-                  top: `${20 + i * 6}%`,
-                }}
-                animate={{
-                  y: [0, -40, 0],
-                  rotate: [0, 180, 360],
-                  scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.8, 0.3],
-                }}
-                transition={{
-                  duration: 6 + (i % 4),
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.5,
-                }}
-              />
-            ))}
-
-            {/* Glassmorphism Bubbles */}
-            {[...Array(presentBubbleCount)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
-                style={{
-                  width: `${60 + i * 20}px`,
-                  height: `${60 + i * 20}px`,
-                  left: `${10 + i * 10}%`,
-                  top: `${15 + i * 8}%`,
-                }}
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.1, 0.3, 0.1],
-                  y: [0, -20, 0],
-                }}
-                transition={{
-                  duration: 4 + (i % 3),
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.3,
-                }}
-              />
-            ))}
-
-            {/* Particle Stream */}
-            {[...Array(presentParticleCount)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-emerald-400/60 rounded-full"
-                style={{
-                  left: `${(i * 47 + 17) % 100}%`,
-                  top: `${(i * 83 + 31) % 100}%`,
-                }}
-                animate={{
-                  scale: [0, 1, 0],
-                  opacity: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: (i * 0.25) % 3,
-                }}
-              />
-            ))}
-
-            {/* Morphing Gradient Orbs */}
-            <motion.div
-              className="absolute top-1/4 left-1/4 w-32 h-32 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-xl"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.2, 0.4, 0.2],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-            />
-            <motion.div
-              className="absolute bottom-1/3 right-1/3 w-24 h-24 bg-gradient-to-br from-teal-400/20 to-emerald-400/20 rounded-full blur-xl"
-              animate={{
-                scale: [1.2, 0.8, 1.2],
-                opacity: [0.3, 0.1, 0.3],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Number.POSITIVE_INFINITY,
-                delay: 1,
-              }}
-            />
-          </>
-        )}
-
-        {/* FUTURE - Cyberpunk Matrix Overdrive */}
-        {currentEra === "future" && (
-          <>
-            {/* Enhanced Matrix Digital Rain */}
-            <div className="absolute inset-0 overflow-hidden">
-              {[...Array(futureRainCount)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute text-cyan-400/40 font-mono text-sm"
-                  style={{
-                    left: `${(i * 3.33) % 100}%`,
-                    top: "-10%",
-                  }}
-                  animate={{
-                    y: ["0vh", "110vh"],
-                  }}
-                  transition={{
-                    duration: 2 + (i % 4),
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: (i * 0.3) % 2,
-                    ease: "linear",
-                  }}
-                >
-                  {Array.from({ length: 15 }, (_, j) => String.fromCharCode(0x30a0 + ((i * 17 + j * 7) % 96))).join("")}
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Holographic Grid with Pulse */}
-            <motion.div
-              className="absolute inset-0 opacity-30"
-              animate={{
-                opacity: [0.2, 0.4, 0.2],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-              }}
-            >
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundImage: `
-                  linear-gradient(rgba(6, 182, 212, 0.6) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(6, 182, 212, 0.6) 1px, transparent 1px)
-                `,
-                  backgroundSize: "30px 30px",
-                }}
-              />
-            </motion.div>
-
-            {/* Multiple Scan Lines */}
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent h-6"
-                animate={{
-                  y: ["-100vh", "100vh"],
-                }}
-                transition={{
-                  duration: 2 + i,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "linear",
-                  delay: i * 0.7,
-                }}
-              />
-            ))}
-
-            {/* Enhanced Floating Holograms */}
-            <div className="absolute inset-0 pointer-events-none">
-              {[...Array(futureHologramCount)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute bg-cyan-400/70 rounded-full shadow-lg shadow-cyan-400/50"
-                  style={{
-                    width: `${8 + (i % 3) * 4}px`,
-                    height: `${8 + (i % 3) * 4}px`,
-                    left: `${10 + i * 6}%`,
-                    top: `${15 + i * 5}%`,
-                  }}
-                  animate={{
-                    scale: [1, 2, 1],
-                    opacity: [0.7, 1, 0.7],
-                    y: [0, -30, 0],
-                    boxShadow: [
-                      "0 0 10px rgba(6, 182, 212, 0.5)",
-                      "0 0 30px rgba(6, 182, 212, 1)",
-                      "0 0 10px rgba(6, 182, 212, 0.5)",
-                    ],
-                  }}
-                  transition={{
-                    duration: 3 + (i % 3),
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: i * 0.2,
-                  }}
-                />
-              ))}
-            </div>
-
-            {/* Data Streams */}
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-px h-full bg-gradient-to-b from-transparent via-cyan-400/60 to-transparent"
-                style={{
-                  left: `${20 + i * 15}%`,
-                }}
-                animate={{
-                  opacity: [0, 1, 0],
-                  scaleY: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.3,
-                }}
-              />
-            ))}
-
-            {/* Intense Glitch Effects */}
-            <motion.div
-              className="absolute inset-0 bg-cyan-400/10"
-              animate={{
-                opacity: [0, 0.3, 0],
-                scaleX: [1, 1.05, 1],
-                skewX: [0, 2, 0],
-              }}
-              transition={{
-                duration: 0.1,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatDelay: 3.5,
-              }}
-            />
-
-            {/* Floating Code Snippets */}
-            {["</>", "{ }", "=>", "&&", "||"].map((code, i) => (
-              <motion.div
-                key={i}
-                className="absolute text-cyan-300/60 font-mono text-lg font-bold"
-                style={{
-                  left: `${20 + i * 15}%`,
-                  top: `${30 + i * 10}%`,
-                }}
-                animate={{
-                  y: [0, -20, 0],
-                  opacity: [0.6, 1, 0.6],
-                  rotate: [0, 5, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Number.POSITIVE_INFINITY,
-                  delay: i * 0.5,
-                }}
-              >
-                {code}
-              </motion.div>
-            ))}
-
-            {/* Neural Network Connections */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
-              {[...Array(8)].map((_, i) => (
-                <motion.line
-                  key={i}
-                  x1={`${20 + i * 10}%`}
-                  y1={`${30 + i * 8}%`}
-                  x2={`${30 + i * 8}%`}
-                  y2={`${40 + i * 6}%`}
-                  stroke="rgb(6, 182, 212)"
-                  strokeWidth="1"
-                  animate={{
-                    opacity: [0, 0.8, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    delay: i * 0.3,
-                  }}
-                />
-              ))}
-            </svg>
-          </>
-        )}
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="flex flex-col items-center space-y-12 sm:space-y-16 relative z-10"
-        >
-          {/* Phone view: smaller clock to avoid overflow */}
-          <div className="scale-85 xs:scale-90 sm:scale-100 origin-center">
-            <Clock era={currentEra} size="large" />
           </div>
-          <TimeLever currentEra={currentEra} onEraChange={setCurrentEra} />
-        </motion.div>
+        </section>
 
-        {/* Enhanced Scroll Hints */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
-          className="absolute text-center w-full"
-          style={{ bottom: "max(2rem, env(safe-area-inset-bottom))" }}
-        >
-          <motion.p
-            className={`text-sm font-medium ${
-              currentEra === "past"
-                ? "text-amber-800 font-serif"
-                : currentEra === "future"
-                  ? "text-cyan-400 font-mono"
-                  : "text-emerald-700 font-sans"
-            }`}
-            animate={
-              currentEra === "future"
-                ? {
-                    opacity: [1, 0.5, 1],
-                    textShadow: [
-                      "0 0 5px rgba(6, 182, 212, 0.5)",
-                      "0 0 15px rgba(6, 182, 212, 1)",
-                      "0 0 5px rgba(6, 182, 212, 0.5)",
-                    ],
-                  }
-                : currentEra === "present"
-                  ? { opacity: [1, 0.8, 1], y: [0, -2, 0] }
-                  : {}
-            }
-            transition={
-              currentEra === "future"
-                ? { duration: 2, repeat: Number.POSITIVE_INFINITY }
-                : currentEra === "present"
-                  ? { duration: 3, repeat: Number.POSITIVE_INFINITY }
-                  : {}
-            }
-          >
-            {currentEra === "past" && "✦ Scroll to unveil the ancient chronicles ✦"}
-            {currentEra === "present" && "◆ Scroll to explore the journey ◆"}
-            {currentEra === "future" && "> INITIALIZE_TEMPORAL_SEQUENCE.exe"}
-          </motion.p>
-        </motion.div>
-      </section>
+        {/* Research and recognition */}
+        <section id="research" className="rule-top">
+          <div className="mx-auto grid max-w-[1160px] gap-14 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-24">
+            <div>
+              <SectionHeading id="research-heading">Research</SectionHeading>
+              <div className="mt-8 space-y-8">
+                <div className="measure">
+                  <h3 className="title text-[1.3rem]">How AI-generated content shapes human decisions</h3>
+                  <p className="mt-2">
+                    A study of AI-induced bias with mentors Pankaj Badoni (UPES) and an Indiana University alumnus. The
+                    literature review is under way and the manuscript is planned for December 2026.
+                  </p>
+                </div>
+                <div className="measure">
+                  <h3 className="title text-[1.3rem]">LSGA-ViT image recognition</h3>
+                  <p className="mt-2">
+                    A hybrid model that feeds a CNN stem into Vision Transformer blocks with Local Self-Gating
+                    Attention, supervised by faculty member Nitika Nigam.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <SectionHeading id="recognition-heading">Recognition</SectionHeading>
+              <ul className="mt-8 space-y-6">
+                <li className="measure">
+                  <h3 className="title text-[1.3rem]">Smart India Hackathon 2025 Grand Finale</h3>
+                  <p className="mt-2">Qualified in December 2025 with a solution for collecting trip-related travel data.</p>
+                </li>
+                <li className="measure">
+                  <h3 className="title text-[1.3rem]">MeitY GENESIS Entrepreneur-in-Residence</h3>
+                  <p className="mt-2">Cohort 2, through UPES, with grant funding for NaviiGo.</p>
+                </li>
+              </ul>
 
-      {/* Full Screen Clock Section */}
-      <FullScreenClock era={currentEra} />
+              <h2 className="title mt-14 text-[1.6rem]">Skills</h2>
+              <dl className="mt-5 space-y-3">
+                {skills.map((s) => (
+                  <div key={s.group} className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                    <dt className="font-semibold">{s.group}</dt>
+                    <dd className="muted">{s.items}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
 
-      {/* Portfolio Content */}
-      <section className="relative z-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentEra}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-          >
-            {renderCurrentPage()}
-          </motion.div>
-        </AnimatePresence>
-      </section>
-
-      {/* Footer */}
-      <Footer era={currentEra} />
+        {/* Contact */}
+        <section id="contact" className="bg-[var(--graphite)] text-[var(--fog)]">
+          <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:py-28">
+            <p className="text-lg">Hiring for a software engineering internship, or building something with agents?</p>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="display mt-5 block break-words text-[1.9rem] text-white underline decoration-[var(--amber)] decoration-[3px] underline-offset-[0.18em] hover:decoration-[5px] sm:text-[3.4rem] lg:text-[4.2rem]"
+            >
+              {EMAIL}
+            </a>
+            <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[1rem]" aria-label="More links">
+              <li>
+                <a className="underline hover:no-underline" href={RESUME} target="_blank" rel="noopener">
+                  Résumé (PDF)
+                </a>
+              </li>
+              <li>
+                <a className="underline hover:no-underline" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a className="underline hover:no-underline" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
+            <p className="mt-16 text-sm text-[#a7b0ba]">© 2026 Parram Nainani. Built with Next.js.</p>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }

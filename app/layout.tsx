@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
 import './globals.css'
+import './site.css'
 
 const siteUrl = 'https://parramnainani.vercel.app'
 const siteTitle = 'Parram Nainani | Software Engineer (Full-Stack & AI/ML)'
@@ -34,10 +33,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  viewportFit: 'cover',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+    themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#edf0f3' },
+    { media: '(prefers-color-scheme: dark)', color: '#edf0f3' },
   ],
 }
 
@@ -49,15 +47,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
-        `}</style>
+        <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossOrigin="" />
       </head>
-      <body className="antialiased min-h-screen overflow-x-hidden">{children}</body>
+      <body className="min-h-screen overflow-x-hidden bg-[#edf0f3]">{children}</body>
     </html>
   )
 }
