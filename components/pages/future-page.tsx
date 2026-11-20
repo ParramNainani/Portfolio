@@ -12,7 +12,7 @@ export function FuturePage() {
       quarter: "2026-2027",
       title: "NaviiGO Global Scale & Enterprise SaaS",
       description:
-        "Scaling NaviiGO to become globally recognized as the benchmark in smart navigation and spatial intelligence, alongside launching SankatMochan-AI enterprise platforms worldwide.",
+        "Growing NaviiGo, the connected travel companion for India, from founder field tests to a full planner, itinerary and bookings workspace, alongside SankatMochan-AI.",
       icon: Navigation,
       status: "in-progress",
     },
@@ -20,7 +20,7 @@ export function FuturePage() {
       quarter: "2027",
       title: "Enterprise Deployments & Global Hubs",
       description:
-        "Deploying NaviiGO across international airports, transit networks, campuses, and mega-venues worldwide while spearheading high-impact AI/ML innovations.",
+        "Expanding NaviiGo's routes, partnerships and booking integrations across India while deepening AI/ML work.",
       icon: Target,
       status: "planning",
     },
@@ -28,7 +28,7 @@ export function FuturePage() {
       quarter: "2028",
       title: "Global Industry Standard & Worldwide Reach",
       description:
-        "Solidifying NaviiGO as an internationally recognized household brand and global navigation standard serving millions of users across multiple continents.",
+        "Taking NaviiGo beyond India as a trusted companion for planning and managing journeys.",
       icon: Rocket,
       status: "upcoming",
     },
@@ -46,9 +46,9 @@ export function FuturePage() {
     {
       title: "NaviiGO Worldwide",
       description:
-        "A globally recognized, AI-driven spatial navigation ecosystem seamlessly guiding millions through complex international airports, transit hubs, universities, and smart cities.",
+        "An AI-assisted travel companion that plans routes, itineraries and bookings for travellers anywhere.",
       icon: Navigation,
-      tech: ["Spatial AI", "Computer Vision", "Real-Time Geo-Mapping", "Next.js", "Cloud Infrastructure", "IoT"],
+      tech: ["Next.js", "AI/ML", "Maps & Routing", "Booking APIs", "Cloud Infrastructure"],
     },
     {
       title: "SankatMochan-AI Enterprise",

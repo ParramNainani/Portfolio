@@ -73,7 +73,7 @@ export default function HomePage() {
             `}
             style={{ fontSize: "clamp(2.75rem, 16vw, 12rem)", lineHeight: 1 }}
           >
-            PARAM NAINANI
+            PARRAM NAINANI
           </motion.h1>
         </div>
 
@@ -93,8 +93,8 @@ export default function HomePage() {
                       : "text-cyan-300/90"
                 } text-sm sm:text-base max-w-sm font-medium`}
               >
-                Hello, I’m Parram, a designer‑engineer who blends AI, UX, and code to shape delightful, performant
-                experiences.
+                Hi, I’m Parram: a software engineer building full-stack and AI/ML products, and founder of
+                NaviiGo.
               </motion.p>
 
               <motion.p
@@ -109,8 +109,8 @@ export default function HomePage() {
                       : "text-cyan-300/90"
                 } text-sm sm:text-base max-w-sm text-right font-medium`}
               >
-                I turn ideas into interfaces that inspire action—rooted in research, crafted with care, and shipped with
-                speed.
+                B.Tech CSE (AI &amp; ML) at UPES. Shipping React, Next.js, Node.js and Flutter apps, with research in
+                vision transformers.
               </motion.p>
             </div>
           </div>

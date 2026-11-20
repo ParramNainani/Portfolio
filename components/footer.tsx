@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Globe } from "lucide-react"
+import { Github, Linkedin, Mail, Globe, FileText } from "lucide-react"
 import type { TimeEra } from "@/app/page"
 
 interface FooterProps {
@@ -13,6 +13,7 @@ export function Footer({ era }: FooterProps) {
     { icon: Github, href: "https://github.com/ParramNainani", label: "GitHub" },
     { icon: Linkedin, href: "https://linkedin.com/in/parramnainani", label: "LinkedIn" },
     { icon: Mail, href: "mailto:parramnainani@gmail.com", label: "Email" },
+    { icon: FileText, href: "/Parram_Nainani_Resume.pdf", label: "Resume" },
   ]
 
   const getFooterStyles = () => {

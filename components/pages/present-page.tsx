@@ -10,23 +10,50 @@ export function PresentPage() {
   const [showAllProjects, setShowAllProjects] = useState(false)
   const isMobile = useIsMobile()
   const skills = [
-    { name: "Python & AI", level: 95, icon: Brain, color: "bg-blue-500" },
-    { name: "Shopify Development", level: 90, icon: Globe, color: "bg-green-500" },
-    { name: "React & Next.js", level: 85, icon: Code2, color: "bg-blue-600" },
-    { name: "Tailwind CSS", level: 88, icon: Palette, color: "bg-purple-500" },
-    { name: "Firebase & APIs", level: 80, icon: Database, color: "bg-orange-500" },
-    { name: "UI/UX Design", level: 82, icon: Smartphone, color: "bg-pink-500" },
+    { name: "React, Next.js & TypeScript", level: 88, icon: Code2, color: "bg-blue-600" },
+    { name: "Node.js, Express & PostgreSQL", level: 80, icon: Database, color: "bg-orange-500" },
+    { name: "Python, PyTorch & scikit-learn", level: 85, icon: Brain, color: "bg-blue-500" },
+    { name: "Flutter & Firebase", level: 80, icon: Smartphone, color: "bg-pink-500" },
+    { name: "Tailwind, GSAP & WebGL", level: 85, icon: Palette, color: "bg-purple-500" },
+    { name: "Shopify & Liquid", level: 80, icon: Globe, color: "bg-green-500" },
   ]
 
   const projects = [
     {
+      title: "NaviiGo: Connected Travel Companion",
+      description:
+        "Travel-tech startup I founded and lead (team of 5-7). naviigo.in helps travellers discover places, plan routes and itineraries, and keep bookings in one journey workspace; I build its flight, rail and hotel search and booking handoffs.",
+      tech: ["Next.js", "Vercel", "Booking integrations", "Product leadership"],
+      status: "Live",
+      highlight: true,
+      link: "https://naviigo.in",
+    },
+    {
+      title: "Finance Dashboard Backend",
+      description:
+        "REST API with JWT authentication and role-based access for Viewer, Analyst and Admin roles; filterable, paginated transaction CRUD with soft deletes; aggregate summaries of totals, daily trends and categories; Zod validation and Swagger docs.",
+      tech: ["Node.js", "Express.js", "PostgreSQL", "Prisma", "JWT", "Docker"],
+      status: "Completed",
+      highlight: true,
+      link: "https://github.com/ParramNainani/Project-Backend",
+    },
+    {
+      title: "COE Nexus Websites",
+      description:
+        "7+ production event and media sites for COE Nexus, including coe-nexus.com, GCC Catalyst Summit, COE Awards Hyderabad and BFSI Bulletin, with WebGL and GSAP animation.",
+      tech: ["React", "Firebase", "GSAP", "WebGL"],
+      status: "Ongoing",
+      highlight: false,
+      link: "https://www.coe-nexus.com/",
+    },
+    {
       title: "SankatMochan-AI",
       description:
-        "Real-time AI-powered life prediction engine combining Vedic astrology, personalized memory logs, and machine learning with Dasha analysis",
-      tech: ["Python", "AI/ML", "Swiss Ephemeris", "Matplotlib", "Vedic Astrology", "Panchang"],
+        "Cross-platform Flutter app with a Python engine that computes planetary positions (Swiss Ephemeris) and Vimshottari Dasha periods, with ML pattern detection and chart generation",
+      tech: ["Flutter", "Python", "Firebase", "Swiss Ephemeris", "Matplotlib"],
       status: "Ongoing",
-      highlight: true,
-      link: "https://github.com/ParramNainani/SankatMochan-AI",
+      highlight: false,
+      link: "https://github.com/ParramNainani/Sankatmochan-ai",
     },
     {
       title: "Apna Camphor",
@@ -55,7 +82,7 @@ export function PresentPage() {
     {
       title: "LSGA‑ViT+CNN Image Recognizers",
       description:
-        "Hybrid image recognition approach: CNN stem for local textures + Vision Transformer blocks augmented with Local Self‑Gating Attention for small‑feature sensitivity in symbolic/astrological imagery.",
+        "Faculty-supervised research (Nitika Nigam): a CNN stem for local textures feeding Vision Transformer blocks with Local Self-Gating Attention for small-feature sensitivity.",
       tech: ["ViT", "CNN", "LSGA", "PyTorch", "Deep Learning"],
       status: "Research",
       highlight: false,
@@ -63,18 +90,25 @@ export function PresentPage() {
   ]
 
   const techStack = [
-    "Python",
+    "TypeScript",
     "JavaScript",
+    "Python",
     "React",
     "Next.js",
-    "Tailwind CSS",
+    "Node.js",
+    "Express.js",
+    "PostgreSQL",
+    "Prisma",
     "Firebase",
-    "Shopify Liquid",
-    "HTML/CSS",
-    "Astro",
     "Flutter",
+    "PyTorch",
+    "scikit-learn",
+    "Docker",
+    "Tailwind CSS",
+    "GSAP",
+    "WebGL",
+    "Shopify Liquid",
     "OpenCV",
-    "Matplotlib",
   ]
 
   return (
@@ -106,21 +140,21 @@ export function PresentPage() {
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8 sm:mb-12 pt-8 sm:pt-12">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-emerald-900 mb-3 sm:mb-4">Current Arsenal</h1>
           <p className="text-lg sm:text-2xl text-emerald-700 leading-relaxed">
-            <strong>Parram Nainani</strong> • Shopify Web Developer | Python & AI Engineer | UI Designer
+            <strong>Parram Nainani</strong> • Software Engineer (Full-Stack &amp; AI/ML) | Founder, NaviiGo
           </p>
           <p className="text-base sm:text-lg text-emerald-600 mt-2">📍 New Delhi, India</p>
           <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-3">
             <div className="px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold flex items-center gap-2">
-              <Circle className="w-3 h-3" /> B.Tech Computer Science
+              <Circle className="w-3 h-3" /> B.Tech CSE (AI &amp; ML), UPES
             </div>
             <div className="px-4 py-2 bg-teal-100 text-teal-800 rounded-full text-sm font-semibold flex items-center gap-2">
-              <Circle className="w-3 h-3" /> Certified Shopify Developer
+              <Circle className="w-3 h-3" /> MeitY GENESIS EiR, Cohort 2
             </div>
             <div className="px-4 py-2 bg-amber-100 text-amber-900 rounded-full text-sm font-semibold flex items-center gap-2">
-              <Trophy className="w-4 h-4" /> SIH Grand Finale Qualifier
+              <Trophy className="w-4 h-4" /> SIH 2025 Grand Finale
             </div>
             <div className="px-4 py-2 bg-cyan-100 text-cyan-900 rounded-full text-sm font-semibold flex items-center gap-2">
-              <Navigation className="w-4 h-4" /> Founder, NaviiGO
+              <Navigation className="w-4 h-4" /> Founder, NaviiGo
             </div>
           </div>
         </motion.div>
@@ -144,7 +178,6 @@ export function PresentPage() {
                       <skill.icon className="w-6 h-6 text-white" />
                     </div>
                     <span className="font-bold text-emerald-900 text-lg">{skill.name}</span>
-                    <span className="ml-auto text-emerald-700 font-semibold">{skill.level}%</span>
                   </div>
                   <div className="w-full bg-emerald-100 rounded-full h-3 overflow-hidden">
                     <motion.div

@@ -9,7 +9,7 @@ export function PastPage() {
   const aboutParagraphs = [
     "In the bustling streets of New Delhi, a curious mind discovered the magic of code in 2020. What started as simple Python scripts evolved into a journey that would bridge the ancient wisdom of Vedic astrology with cutting-edge artificial intelligence.",
     "From building image sorters with OpenCV to launching Shopify empires, from qualifying for the Smart India Hackathon Grand Finale to founding NaviiGO and creating AI engines that decode planetary movements - this is the story of transformation through technology.",
-    "Every line of code and milestone forged in the past became the bedrock for the globally recognized AI-powered future we're engineering today.",
+    "Every line of code and every milestone in the past is the groundwork for what I'm building today.",
   ]
   const timelineEvents = [
     {
@@ -37,31 +37,32 @@ export function PastPage() {
     {
       year: "2023",
       title: "Certified Shopify Developer",
-      description: "Achieved Shopify certification while pursuing B.Tech in Computer Science Engineering",
+      description: "Earned a Shopify developer certification and kept building client stores",
+
       icon: Award,
       color: "bg-amber-900",
     },
     {
       year: "2024",
-      title: "AI Meets Ancient Wisdom",
+      title: "UPES & AI Meets Ancient Wisdom",
       description:
-        "Built SankatMochan-AI - a revolutionary engine combining Vedic astrology with AI for real-time life predictions",
+        "Started B.Tech CSE (AI & ML) at UPES and began SankatMochan-AI, a Flutter + Python engine for Vedic astrology computations",
       icon: Brain,
       color: "bg-amber-950",
     },
     {
       year: "2025",
-      title: "SIH Grand Finale & Founding NaviiGO",
+      title: "First Roles, SIH Grand Finale & Founding NaviiGo",
       description:
-        "Founded NaviiGO to revolutionize smart indoor navigation and qualified for the prestigious Smart India Hackathon (SIH) Grand Finale while engineering deep learning vision architectures.",
+        "Shipped Flutter apps at NetStratix and React apps at BinaryKeeda, qualified for the Smart India Hackathon 2025 Grand Finale (December) with a trip-data collection solution, and founded NaviiGo, a connected travel companion for India.",
       icon: Trophy,
       color: "bg-stone-800",
     },
     {
       year: "2026",
-      title: "B.Tech Graduation & Enterprise Horizon",
+      title: "COE Nexus, GENESIS EiR & naviigo.in",
       description:
-        "Completed B.Tech in Computer Science Engineering with academic excellence, advancing SankatMochan-AI and laying the groundwork to take NaviiGO global.",
+        "Joined COE Nexus as a web developer (7+ production sites), selected for the MeitY GENESIS Entrepreneur-in-Residence programme (Cohort 2), and shipped naviigo.in, while pursuing B.Tech CSE (AI & ML) at UPES (CGPA 8.7, graduating 2028).",
       icon: GraduationCap,
       color: "bg-stone-900",
     },
@@ -110,7 +111,7 @@ export function PastPage() {
             {showAbout ? "Show less" : "Show more"}
           </button>
           <motion.a
-            href="https://drive.google.com/file/d/1sjTNCwuFz_uQZsNgd5EXJJq9OccrBtym/view?usp=sharing"
+            href="/Parram_Nainani_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(217, 119, 6, 0.3)" }}
