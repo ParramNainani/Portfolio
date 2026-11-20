@@ -38,6 +38,33 @@ export function PresentPage() {
       link: "https://github.com/ParramNainani/Project-Backend",
     },
     {
+      title: "Kshetrajna Drift: Local AI Filing Agent",
+      description:
+        "Local open-weight AI agent (Llama 3.1 8B via Ollama) that sorts loose files by purpose, explains each choice and moves only approved files. SHA-256 re-checks, a SQLite intent journal with undo and crash recovery, expiring single-use approvals, 31 tests.",
+      tech: ["Python", "Llama 3.1", "Ollama", "SQLite", "Human-in-the-loop"],
+      status: "Completed",
+      highlight: true,
+      link: "https://github.com/ParramNainani/kshetrajna-drift",
+    },
+    {
+      title: "ReVoice: Interruption-Safe Voice Agent",
+      description:
+        "Voice support agent built for the Rime hackathon. Every user task carries a generation ID, so an interruption invalidates in-flight tool calls and stale results are discarded before they are spoken; an acceptance test replays the scenario.",
+      tech: ["TypeScript", "LiveKit Agents", "Deepgram", "OpenAI", "React"],
+      status: "Completed",
+      highlight: true,
+      link: "https://github.com/ParramNainani/DataForge",
+    },
+    {
+      title: "Customer-Support Triage RL Environment",
+      description:
+        "OpenEnv environment where an LLM agent triages support tickets (resolve, investigate or escalate) across easy, medium and hard tasks with graded rewards from 0 to 1. Dockerised for Hugging Face Spaces.",
+      tech: ["Python", "OpenEnv", "Reinforcement learning", "Docker", "Gradio"],
+      status: "Completed",
+      highlight: false,
+      link: "https://github.com/ParramNainani/OpenENV-ScalerSchool",
+    },
+    {
       title: "COE Nexus Websites",
       description:
         "7+ production event and media sites for COE Nexus, including coe-nexus.com, GCC Catalyst Summit, COE Awards Hyderabad and BFSI Bulletin, with WebGL and GSAP animation.",
