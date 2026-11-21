@@ -49,7 +49,7 @@ export default function RootLayout({
       <head>
         <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossOrigin="" />
         <noscript>
-          <style>{`.intro-hidden{visibility:visible}`}</style>
+          <style>{`.intro-hidden{visibility:visible}.portrait-fallback{display:block}`}</style>
         </noscript>
       </head>
       <body className="min-h-screen overflow-x-hidden bg-[#edf0f3]">{children}</body>

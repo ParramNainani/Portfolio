@@ -1,6 +1,7 @@
 import { ApprovalRequest } from "@/components/site/approval-request"
 import { ActionLoop } from "@/components/site/action-loop"
 import { Hero } from "@/components/site/hero"
+import { DotField } from "@/components/site/dot-field"
 
 const RESUME = "/Parram_Nainani_Resume.pdf"
 const EMAIL = "parramnainani@gmail.com"
@@ -8,6 +9,7 @@ const EMAIL = "parramnainani@gmail.com"
 const projects = [
   {
     name: "Kshetrajna Drift",
+    glyph: "drift",
     year: "2026",
     what: "A local AI agent for messy folders. Llama 3.1 runs on your own machine, suggests where each loose file belongs and says why, then moves only the files you approve.",
     proof: ["31 automated tests", "SHA-256 re-checks before every move", "Undo journal with crash recovery"],
@@ -16,6 +18,7 @@ const projects = [
   },
   {
     name: "ReVoice",
+    glyph: "revoice",
     year: "2026",
     what: "A voice support agent that copes with being interrupted. Every request gets a generation ID, so when you change your mind mid-sentence, answers to the old request are thrown away instead of spoken.",
     proof: ["Built for the Rime hackathon", "Acceptance test replays a real interruption"],
@@ -24,6 +27,7 @@ const projects = [
   },
   {
     name: "Support-triage RL environment",
+    glyph: "rlenv",
     year: "2026",
     what: "An OpenEnv environment where an LLM agent decides whether to resolve, investigate or escalate customer tickets, graded at three difficulty levels.",
     proof: ["Rewards from 0 to 1 per decision", "Dockerised for Hugging Face Spaces"],
@@ -32,6 +36,7 @@ const projects = [
   },
   {
     name: "Finance dashboard backend",
+    glyph: "finance",
     year: "2026",
     what: "A REST API for a finance dashboard with three roles, filterable transaction records and summary endpoints for totals, daily trends and categories.",
     proof: ["JWT auth and role-based access", "Zod validation and Swagger docs"],
@@ -40,6 +45,7 @@ const projects = [
   },
   {
     name: "NaviiGo",
+    glyph: "naviigo",
     year: "2025 – now",
     what: "The travel-tech company I founded and run. naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one workspace.",
     proof: ["Team of 5–7", "MeitY GENESIS Entrepreneur-in-Residence, Cohort 2"],
@@ -90,7 +96,7 @@ const skills = [
 
 function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
   return (
-    <h2 id={id} tabIndex={-1} className="title text-[2rem] sm:text-[2.6rem] outline-none">
+    <h2 id={id} tabIndex={-1} className="display section-type outline-none">
       {children}
     </h2>
   )
@@ -106,7 +112,7 @@ export default function HomePage() {
         Skip to work
       </a>
 
-      <header className="mx-auto flex max-w-[1160px] items-center justify-between gap-6 px-5 py-5 sm:px-8">
+      <header className="wrap flex items-center justify-between gap-6 py-5">
         <a href="#top" className="title text-lg no-underline">
           Parram Nainani
         </a>
@@ -133,48 +139,54 @@ export default function HomePage() {
         <Hero />
 
         {/* Work */}
-        <section id="work" className="rule-top scroll-mt-4">
-          <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:py-24">
+        <section id="work" className="scroll-mt-4">
+          <div className="wrap py-20 lg:py-28">
             <SectionHeading id="work-heading">Selected work</SectionHeading>
-            <p className="measure muted mt-3">
+            <p className="measure muted mt-4 text-lg">
               Things I built outside of client work, with source you can read. Company projects are under Experience.
             </p>
 
             {/* Lead project */}
-            <article className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.05fr]" aria-labelledby="kshetrajna">
-              <div>
-                <p className="muted text-[0.95rem]">2026, lead project</p>
-                <h3 id="kshetrajna" className="display mt-2 text-[2.4rem] sm:text-[3.2rem]">
-                  Kshetrajna
-                </h3>
-                <p className="measure mt-5 text-lg">
-                  A private assistant for Windows PCs. It watches app activity and memory pressure, explains what it
-                  would change and why, and only acts once you approve: closing or reprioritising apps, trimming
-                  memory, moving files to a quarantine you can restore from.
-                </p>
-                <ul className="facts mt-6 space-y-1.5">
-                  <li>573 automated tests, with CI on Linux and native Windows</li>
-                  <li>Approvals expire, can’t be replayed, and every action is journaled for recovery</li>
-                  <li>Reproducible builds, with Windows bundles for x64 and ARM64 (Snapdragon)</li>
-                  <li>48 commits over about a month, roughly 12,900 lines of Python with no runtime dependencies</li>
-                </ul>
-                <p className="muted mt-5 text-[0.95rem]">Python, Win32 APIs, SQLite, GitHub Actions</p>
-                <p className="mt-5">
-                  <a
-                    className="text-link"
-                    href="https://github.com/Team-SankatMochan/KSHETRAJNA-OS"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Source on GitHub
-                  </a>
-                </p>
+            <article data-dot-trigger="kshetrajna" className="card card-lead mt-14" aria-labelledby="kshetrajna">
+              <div className="card-lead-top">
+                <div>
+                  <p className="muted text-[0.95rem]">2026, lead project</p>
+                  <h3 id="kshetrajna" className="display card-lead-name mt-2">
+                    Kshetrajna
+                  </h3>
+                  <p className="measure mt-5 text-lg">
+                    A private assistant for Windows PCs. It watches app activity and memory pressure, explains what it
+                    would change and why, and only acts once you approve: closing or reprioritising apps, trimming
+                    memory, moving files to a quarantine you can restore from.
+                  </p>
+                  <ul className="facts mt-6 space-y-1.5">
+                    <li>573 automated tests, with CI on Linux and native Windows</li>
+                    <li>Approvals expire, can’t be replayed, and every action is journaled for recovery</li>
+                    <li>Reproducible builds, with Windows bundles for x64 and ARM64 (Snapdragon)</li>
+                    <li>48 commits over about a month, roughly 12,900 lines of Python with no runtime dependencies</li>
+                  </ul>
+                  <p className="muted mt-5 text-[0.95rem]">Python, Win32 APIs, SQLite, GitHub Actions</p>
+                  <div className="mt-6 flex flex-wrap items-center gap-3">
+                    <a className="btn btn-primary" href="https://kshetrajna-os.runs-at.dev/" target="_blank" rel="noopener">
+                      Try the live demo
+                    </a>
+                    <a
+                      className="btn btn-quiet"
+                      href="https://github.com/Team-SankatMochan/KSHETRAJNA-OS"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Source on GitHub
+                    </a>
+                  </div>
+                </div>
+                <div data-dot-slot="kshetrajna" className="slot slot-lead" aria-hidden="true" />
               </div>
 
-              <div className="self-start rounded-[18px] bg-[var(--paper)] p-6 sm:p-8">
+              <div className="card-lead-loop">
                 <p className="font-semibold">How every action moves through Kshetrajna</p>
                 <ActionLoop />
-                <p className="muted mt-6 text-[0.97rem]">
+                <p className="muted mt-5 text-[0.97rem]">
                   Nothing reaches the Act step without an explicit approval, and every action keeps a route back. The
                   same rule runs through Kshetrajna Drift and ReVoice below.
                 </p>
@@ -182,31 +194,40 @@ export default function HomePage() {
             </article>
 
             {/* Other projects */}
-            <ul className="mt-16">
-              {projects.map((p) => (
-                <li key={p.name} className="rule-top grid gap-4 py-8 md:grid-cols-[minmax(0,17rem)_1fr_auto] md:gap-10">
-                  <div>
-                    <h3 className="title text-[1.45rem]">{p.name}</h3>
-                    <p className="muted mt-1 text-[0.95rem]">{p.year}</p>
-                  </div>
-                  <div className="measure">
-                    <p>{p.what}</p>
-                    <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[0.95rem]">
-                      {p.proof.map((f) => (
-                        <li key={f} className="font-medium">
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="muted mt-2 text-[0.95rem]">{p.stack}</p>
-                  </div>
-                  <div className="md:text-right">
-                    {p.links.map((l) => (
-                      <a key={l.href} className="text-link" href={l.href} target="_blank" rel="noopener">
-                        {l.label}
-                      </a>
-                    ))}
-                  </div>
+            <ul className="mt-8 space-y-8">
+              {projects.map((p, i) => (
+                <li key={p.name}>
+                  <article
+                    data-dot-trigger={p.glyph}
+                    className={`card card-project ${i % 2 === 1 ? "is-flipped" : ""}`}
+                    aria-labelledby={`project-${p.glyph}`}
+                  >
+                    <div data-dot-slot={p.glyph} className="slot" aria-hidden="true" />
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                        <h3 id={`project-${p.glyph}`} className="display card-name">
+                          {p.name}
+                        </h3>
+                        <p className="muted text-[0.95rem]">{p.year}</p>
+                      </div>
+                      <p className="measure mt-4 text-[1.08rem]">{p.what}</p>
+                      <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-[0.95rem]">
+                        {p.proof.map((f) => (
+                          <li key={f} className="font-medium">
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="muted mt-2 text-[0.95rem]">{p.stack}</p>
+                      <p className="mt-5 flex flex-wrap gap-x-6">
+                        {p.links.map((l) => (
+                          <a key={l.href} className="text-link" href={l.href} target="_blank" rel="noopener">
+                            {l.label}
+                          </a>
+                        ))}
+                      </p>
+                    </div>
+                  </article>
                 </li>
               ))}
             </ul>
@@ -214,8 +235,8 @@ export default function HomePage() {
         </section>
 
         {/* Experience */}
-        <section id="experience" className="rule-top bg-[var(--paper)]">
-          <div className="mx-auto max-w-[1160px] px-5 py-20 sm:px-8 lg:py-24">
+        <section id="experience" className="bg-[var(--paper)]">
+          <div className="wrap py-20 lg:py-28">
             <SectionHeading id="experience-heading">Experience</SectionHeading>
             <ol className="mt-10">
               {experience.map((e) => (
@@ -250,8 +271,8 @@ export default function HomePage() {
         </section>
 
         {/* Research and recognition */}
-        <section id="research" className="rule-top">
-          <div className="mx-auto grid max-w-[1160px] gap-14 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-24">
+        <section id="research">
+          <div className="wrap grid gap-14 py-20 lg:grid-cols-2 lg:py-28">
             <div>
               <SectionHeading id="research-heading">Research</SectionHeading>
               <div className="mt-8 space-y-8">
@@ -298,29 +319,32 @@ export default function HomePage() {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="bg-[var(--graphite)] text-[var(--fog)]">
-          <div className="mx-auto grid max-w-[1160px] gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:py-28">
+        <section id="contact" data-dot-trigger="contact" className="bg-[var(--paper)]">
+          <div className="wrap grid gap-12 py-20 lg:grid-cols-[1fr_1fr] lg:items-center lg:py-28">
             <div>
-              <p className="text-lg">Hiring for a software engineering internship, or building something with agents?</p>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="title mt-5 block break-words text-[1.7rem] text-white underline decoration-[var(--amber)] decoration-[3px] underline-offset-[0.18em] hover:decoration-[5px] sm:text-[2.4rem]"
-              >
-                {EMAIL}
+              <div data-dot-slot="contact" className="slot slot-contact" aria-hidden="true" />
+              <p className="mt-8 text-lg">Hiring for a software engineering internship, or building something with agents?</p>
+              <a href={`mailto:${EMAIL}`} className="display contact-email mt-4 block">
+                Email me
               </a>
-              <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[1rem]" aria-label="More links">
+              <p className="mt-3 text-lg">
+                <a className="text-link" href={`mailto:${EMAIL}`}>
+                  {EMAIL}
+                </a>
+              </p>
+              <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[1rem]" aria-label="More links">
                 <li>
-                  <a className="underline hover:no-underline" href={RESUME} target="_blank" rel="noopener">
+                  <a className="text-link" href={RESUME} target="_blank" rel="noopener">
                     Résumé (PDF)
                   </a>
                 </li>
                 <li>
-                  <a className="underline hover:no-underline" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
+                  <a className="text-link" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
                     GitHub
                   </a>
                 </li>
                 <li>
-                  <a className="underline hover:no-underline" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
+                  <a className="text-link" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
                     LinkedIn
                   </a>
                 </li>
@@ -335,9 +359,10 @@ export default function HomePage() {
               secondary={{ label: "Open résumé", href: RESUME }}
             />
           </div>
-          <p className="mx-auto max-w-[1160px] px-5 pb-10 text-sm text-[#a7b0ba] sm:px-8">© 2026 Parram Nainani. Built with Next.js, Three.js and GSAP.</p>
+          <p className="wrap pb-10 text-sm muted">© 2026 Parram Nainani. Built with Next.js, Three.js and GSAP.</p>
         </section>
       </main>
+      <DotField />
     </div>
   )
 }
