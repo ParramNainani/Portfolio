@@ -33,7 +33,7 @@ const featured = [
     name: "NaviiGo",
     year: "2025 – now",
     tagline: "The travel-tech company I founded and run",
-    what: "naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one place. I lead a team of 5–7 and build the product.",
+    what: "naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one place. I lead a team of 5–7 and build the product. It has just launched, and our pilot starts around New Year 2027.",
     proof: [
       "Flight trip types, rail timetables and hotel links in one planner",
       "MeitY GENESIS Entrepreneur-in-Residence, Cohort 2, with grant funding",
@@ -88,7 +88,7 @@ const experience: { when: string; role: string; org: string; detail: string; lin
     when: "Dec 2025 – now",
     role: "Founder and CEO",
     org: "NaviiGo",
-    detail: "Started the company, lead a team of 5–7, and build naviigo.in: trip planning, itineraries and bookings.",
+    detail: "Started the company, lead a team of 5–7, and build naviigo.in: trip planning, itineraries and bookings. Just launched; pilot starts around New Year 2027.",
   },
   {
     when: "Jan 2026 – now",
@@ -103,15 +103,15 @@ const experience: { when: string; role: string; org: string; detail: string; lin
   },
   {
     when: "Sep – Nov 2025",
-    role: "Software developer intern (contract)",
+    role: "Full-stack development intern",
     org: "BinaryKeeda",
-    detail: "Built responsive, accessible web apps in React, Tailwind CSS and Firebase from design-system components.",
+    detail: "Set up the codebase for BinaryKeeda’s new hiring app in React, TypeScript and React Query.",
   },
   {
-    when: "May – Oct 2025",
-    role: "Software developer",
+    when: "Jun – Sep 2025",
+    role: "Software development intern (Flutter)",
     org: "NetStratix Technologies",
-    detail: "Developed and maintained cross-platform Flutter and Firebase mobile apps with the back-end and design teams.",
+    detail: "Developed Flutter and Firebase app features with the back-end and design teams over a 120-day internship.",
   },
 ]
 
