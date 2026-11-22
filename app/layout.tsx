@@ -34,8 +34,8 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
     themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#edf0f3' },
-    { media: '(prefers-color-scheme: dark)', color: '#edf0f3' },
+    { media: '(prefers-color-scheme: light)', color: '#0e1117' },
+    { media: '(prefers-color-scheme: dark)', color: '#0e1117' },
   ],
 }
 
@@ -47,12 +47,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossOrigin="" />
-        <noscript>
-          <style>{`.intro-hidden{visibility:visible}.portrait-fallback{display:block}`}</style>
-        </noscript>
+        <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossOrigin="" />
       </head>
-      <body className="min-h-screen overflow-x-hidden bg-[#edf0f3]">{children}</body>
+      <body className="min-h-screen overflow-x-hidden">{children}</body>
     </html>
   )
 }

@@ -1,73 +1,101 @@
-import { ApprovalRequest } from "@/components/site/approval-request"
-import { ActionLoop } from "@/components/site/action-loop"
-import { Hero } from "@/components/site/hero"
-import { DotField } from "@/components/site/dot-field"
+/* eslint-disable @next/next/no-img-element */
 
 const RESUME = "/Parram_Nainani_Resume.pdf"
 const EMAIL = "parramnainani@gmail.com"
+const GITHUB = "https://github.com/ParramNainani"
+const LINKEDIN = "https://linkedin.com/in/parramnainani"
+
+type Link = { label: string; href: string }
+
+const featured = [
+  {
+    name: "Kshetrajna",
+    year: "2026",
+    tagline: "A private AI assistant for Windows PCs",
+    what: "It watches app activity and memory pressure, explains what it would change and why, and only acts once you approve: reprioritising apps, trimming memory, moving files to a quarantine you can restore from.",
+    proof: [
+      "573 automated tests, CI on Linux and native Windows",
+      "Approvals expire, can’t be replayed, and every action is journaled for recovery",
+      "Native Windows builds for x64 and ARM64 (Snapdragon)",
+    ],
+    stack: "Python, Win32 APIs, SQLite, GitHub Actions",
+    shot: {
+      src: "/shot-kshetrajna.jpg",
+      url: "kshetrajna-os.runs-at.dev",
+      alt: "Kshetrajna's demo dashboard showing CPU, memory and workflow cards",
+    },
+    links: [
+      { label: "Try the live demo", href: "https://kshetrajna-os.runs-at.dev/" },
+      { label: "Source on GitHub", href: "https://github.com/Team-SankatMochan/KSHETRAJNA-OS" },
+    ] as Link[],
+  },
+  {
+    name: "NaviiGo",
+    year: "2025 – now",
+    tagline: "The travel-tech company I founded and run",
+    what: "naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one place. I lead a team of 5–7 and build the product.",
+    proof: [
+      "Flight trip types, rail timetables and hotel links in one planner",
+      "MeitY GENESIS Entrepreneur-in-Residence, Cohort 2, with grant funding",
+    ],
+    stack: "Next.js on Vercel",
+    shot: {
+      src: "/shot-naviigo.jpg",
+      url: "naviigo.in",
+      alt: "NaviiGo's home page with a map of India and the line Travel should feel like a journey",
+    },
+    links: [{ label: "Visit naviigo.in", href: "https://naviigo.in" }] as Link[],
+  },
+]
 
 const projects = [
   {
     name: "Kshetrajna Drift",
-    glyph: "drift",
     year: "2026",
-    what: "A local AI agent for messy folders. Llama 3.1 runs on your own machine, suggests where each loose file belongs and says why, then moves only the files you approve.",
-    proof: ["31 automated tests", "SHA-256 re-checks before every move", "Undo journal with crash recovery"],
-    stack: "Python, Llama 3.1 8B via Ollama, SQLite",
-    links: [{ label: "Source", href: "https://github.com/ParramNainani/kshetrajna-drift" }],
+    what: "A local AI agent for messy folders. Llama 3.1 runs on your own machine, suggests where each file belongs and why, then moves only the files you approve.",
+    proof: "31 tests, SHA-256 re-checks before every move, undo journal",
+    stack: "Python, Llama 3.1 8B (Ollama), SQLite",
+    href: "https://github.com/ParramNainani/kshetrajna-drift",
   },
   {
     name: "ReVoice",
-    glyph: "revoice",
     year: "2026",
-    what: "A voice support agent that copes with being interrupted. Every request gets a generation ID, so when you change your mind mid-sentence, answers to the old request are thrown away instead of spoken.",
-    proof: ["Built for the Rime hackathon", "Acceptance test replays a real interruption"],
-    stack: "TypeScript, LiveKit Agents, Deepgram, OpenAI, React",
-    links: [{ label: "Source", href: "https://github.com/ParramNainani/DataForge" }],
+    what: "A voice support agent that copes with being interrupted. Answers to a request you’ve changed your mind about are thrown away instead of spoken.",
+    proof: "Built for the Rime hackathon; an acceptance test replays a real interruption",
+    stack: "TypeScript, LiveKit Agents, Deepgram, OpenAI",
+    href: "https://github.com/ParramNainani/DataForge",
   },
   {
     name: "Support-triage RL environment",
-    glyph: "rlenv",
     year: "2026",
-    what: "An OpenEnv environment where an LLM agent decides whether to resolve, investigate or escalate customer tickets, graded at three difficulty levels.",
-    proof: ["Rewards from 0 to 1 per decision", "Dockerised for Hugging Face Spaces"],
+    what: "An OpenEnv environment where an LLM agent decides whether to resolve, investigate or escalate customer tickets.",
+    proof: "Graded rewards at 3 difficulty levels, Dockerised for Hugging Face Spaces",
     stack: "Python, OpenEnv, Docker, Gradio",
-    links: [{ label: "Source", href: "https://github.com/ParramNainani/OpenENV-ScalerSchool" }],
+    href: "https://github.com/ParramNainani/OpenENV-ScalerSchool",
   },
   {
-    name: "Finance dashboard backend",
-    glyph: "finance",
+    name: "Finance dashboard API",
     year: "2026",
-    what: "A REST API for a finance dashboard with three roles, filterable transaction records and summary endpoints for totals, daily trends and categories.",
-    proof: ["JWT auth and role-based access", "Zod validation and Swagger docs"],
+    what: "A REST API for a finance dashboard with three roles, filterable records and endpoints for totals, daily trends and categories.",
+    proof: "JWT auth, role-based access, Zod validation, Swagger docs",
     stack: "Node.js, Express, PostgreSQL, Prisma, Docker",
-    links: [{ label: "Source", href: "https://github.com/ParramNainani/Project-Backend" }],
-  },
-  {
-    name: "NaviiGo",
-    glyph: "naviigo",
-    year: "2025 – now",
-    what: "The travel-tech company I founded and run. naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one workspace.",
-    proof: ["Team of 5–7", "MeitY GENESIS Entrepreneur-in-Residence, Cohort 2"],
-    stack: "Next.js on Vercel",
-    links: [{ label: "Visit naviigo.in", href: "https://naviigo.in" }],
+    href: "https://github.com/ParramNainani/Project-Backend",
   },
 ]
 
-const experience = [
+const experience: { when: string; role: string; org: string; detail: string; links?: Link[] }[] = [
   {
     when: "Dec 2025 – now",
     role: "Founder and CEO",
     org: "NaviiGo",
-    detail:
-      "Started and incorporated the company, lead a team of 5–7, and build the website: flight trip types, rail timetables, hotel links and safer booking handoffs.",
+    detail: "Started the company, lead a team of 5–7, and build naviigo.in: trip planning, itineraries and bookings.",
   },
   {
     when: "Jan 2026 – now",
     role: "Web developer",
     org: "COE Nexus",
     detail:
-      "Built and maintain 7+ live event and media sites in React, Vite, Firebase and GSAP, including registration and nomination flows for summits and awards.",
+      "Built and maintain 7+ live event and media sites in React, Vite, Firebase and GSAP, including registration and nomination flows.",
     links: [
       { label: "GCC Catalyst Summit", href: "https://gcc-catalyst-summit.coe-nexus.com/" },
       { label: "COE Awards Hyderabad", href: "https://coe-awards-hyderabad.coe-nexus.com/" },
@@ -83,234 +111,251 @@ const experience = [
     when: "May – Oct 2025",
     role: "Software developer",
     org: "NetStratix Technologies",
-    detail: "Developed and maintained cross-platform Flutter and Firebase mobile apps with the backend and design teams.",
+    detail: "Developed and maintained cross-platform Flutter and Firebase mobile apps with the back-end and design teams.",
   },
 ]
 
 const skills = [
   { group: "Languages", items: "Python, TypeScript, JavaScript, Java, Dart, SQL" },
   { group: "AI and agents", items: "LLM agents, Ollama, LiveKit Agents, RAG, PyTorch, scikit-learn" },
-  { group: "Web and back end", items: "React, Next.js, Node.js, Express, PostgreSQL, Prisma, SQLite, Firebase" },
-  { group: "Tools", items: "Git, GitHub Actions, Docker, Vercel, Flutter, GSAP, WebGL" },
+  { group: "Web and back end", items: "React, Next.js, Node.js, Express, PostgreSQL, Prisma, Firebase" },
+  { group: "Tools", items: "Git, GitHub Actions, Docker, Vercel, Flutter" },
 ]
 
-function SectionHeading({ id, children }: { id: string; children: React.ReactNode }) {
+const delay = (ms: number) => ({ ["--d" as string]: `${ms}ms` }) as React.CSSProperties
+
+function Frame({ src, url, alt }: { src: string; url: string; alt: string }) {
   return (
-    <h2 id={id} tabIndex={-1} className="display section-type outline-none">
-      {children}
-    </h2>
+    <div className="frame">
+      <div className="frame-bar" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <p>{url}</p>
+      </div>
+      <img src={src} alt={alt} width={800} height={500} loading="lazy" />
+    </div>
   )
 }
 
 export default function HomePage() {
   return (
-    <div className="site min-h-screen">
-      <a
-        href="#work"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2"
-      >
+    <div className="site">
+      <a href="#work" className="skip">
         Skip to work
       </a>
 
-      <header className="wrap flex items-center justify-between gap-6 py-5">
-        <a href="#top" className="title text-lg no-underline">
-          Parram Nainani
-        </a>
-        <nav aria-label="Sections" className="flex items-center gap-6 text-[0.95rem]">
-          <a href="#work" className="hidden hover:underline md:inline">
-            Work
+      <header className="topbar">
+        <div className="container topbar-inner">
+          <a href="#top" className="brand">
+            Parram Nainani
           </a>
-          <a href="#experience" className="hidden hover:underline md:inline">
-            Experience
-          </a>
-          <a href="#research" className="hidden hover:underline md:inline">
-            Research
-          </a>
-          <a href="#contact" className="hidden hover:underline md:inline">
-            Contact
-          </a>
-          <a href={RESUME} target="_blank" rel="noopener" className="btn btn-quiet">
-            Résumé (PDF)
-          </a>
-        </nav>
+          <nav aria-label="Sections" className="nav">
+            <a href="#work">Work</a>
+            <a href="#experience">Experience</a>
+            <a href="#about">About</a>
+            <a href={RESUME} target="_blank" rel="noopener" className="btn btn-small">
+              Résumé
+            </a>
+          </nav>
+        </div>
       </header>
 
       <main id="top">
-        <Hero />
+        {/* Hero */}
+        <section className="container hero">
+          <div className="hero-text">
+            <p className="status rise" style={delay(0)}>
+              <span className="status-dot" aria-hidden="true" />
+              Open to software engineering internships
+            </p>
+            <h1 className="rise" style={delay(60)}>
+              Parram Nainani
+            </h1>
+            <p className="lede rise" style={delay(120)}>
+              I build AI agents and web products, and ship them with tests.
+            </p>
+            <p className="hero-meta rise" style={delay(180)}>
+              Computer science (AI and ML) at UPES. Founder of NaviiGo. Web developer at COE Nexus.
+            </p>
+            <div className="actions rise" style={delay(240)}>
+              <a href={RESUME} target="_blank" rel="noopener" className="btn btn-primary">
+                Download résumé
+              </a>
+              <a href={`mailto:${EMAIL}`} className="btn">
+                Email me
+              </a>
+              <a href={GITHUB} target="_blank" rel="noopener" className="text-link">
+                GitHub
+              </a>
+              <a href={LINKEDIN} target="_blank" rel="noopener" className="text-link">
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <figure className="hero-photo rise" style={delay(120)}>
+            <img src="/parram.jpg" alt="Parram Nainani" width={500} height={500} />
+            <figcaption className="now">
+              <span className="now-label">Now building</span>
+              <span>
+                <strong>Kshetrajna</strong>, a local AI assistant for Windows.{" "}
+                <a href="https://kshetrajna-os.runs-at.dev/" target="_blank" rel="noopener" className="text-link">
+                  Try the demo
+                </a>
+              </span>
+            </figcaption>
+          </figure>
+        </section>
 
         {/* Work */}
-        <section id="work" className="scroll-mt-4">
-          <div className="wrap py-20 lg:py-28">
-            <SectionHeading id="work-heading">Selected work</SectionHeading>
-            <p className="measure muted mt-4 text-lg">
-              Things I built outside of client work, with source you can read. Company projects are under Experience.
-            </p>
+        <section id="work" className="container section">
+          <div className="section-head">
+            <h2>Selected work</h2>
+            <p>Products and projects I built and can show. Client work for companies is under Experience.</p>
+          </div>
 
-            {/* Lead project */}
-            <article data-dot-trigger="kshetrajna" className="card card-lead mt-14" aria-labelledby="kshetrajna">
-              <div className="card-lead-top">
-                <div>
-                  <p className="muted text-[0.95rem]">2026, lead project</p>
-                  <h3 id="kshetrajna" className="display card-lead-name mt-2">
-                    Kshetrajna
-                  </h3>
-                  <p className="measure mt-5 text-lg">
-                    A private assistant for Windows PCs. It watches app activity and memory pressure, explains what it
-                    would change and why, and only acts once you approve: closing or reprioritising apps, trimming
-                    memory, moving files to a quarantine you can restore from.
+          <div className="featured">
+            {featured.map((p, i) => (
+              <article key={p.name} className={`feature ${i % 2 === 1 ? "is-flipped" : ""}`} aria-labelledby={`f-${i}`}>
+                <div className="feature-text">
+                  <p className="eyebrow">
+                    {p.tagline}, {p.year}
                   </p>
-                  <ul className="facts mt-6 space-y-1.5">
-                    <li>573 automated tests, with CI on Linux and native Windows</li>
-                    <li>Approvals expire, can’t be replayed, and every action is journaled for recovery</li>
-                    <li>Reproducible builds, with Windows bundles for x64 and ARM64 (Snapdragon)</li>
-                    <li>48 commits over about a month, roughly 12,900 lines of Python with no runtime dependencies</li>
+                  <h3 id={`f-${i}`}>{p.name}</h3>
+                  <p className="feature-what">{p.what}</p>
+                  <ul className="proof">
+                    {p.proof.map((x) => (
+                      <li key={x}>{x}</li>
+                    ))}
                   </ul>
-                  <p className="muted mt-5 text-[0.95rem]">Python, Win32 APIs, SQLite, GitHub Actions</p>
-                  <div className="mt-6 flex flex-wrap items-center gap-3">
-                    <a className="btn btn-primary" href="https://kshetrajna-os.runs-at.dev/" target="_blank" rel="noopener">
-                      Try the live demo
-                    </a>
-                    <a
-                      className="btn btn-quiet"
-                      href="https://github.com/Team-SankatMochan/KSHETRAJNA-OS"
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Source on GitHub
-                    </a>
+                  <p className="stack">{p.stack}</p>
+                  <div className="actions">
+                    {p.links.map((l, j) => (
+                      <a
+                        key={l.href}
+                        href={l.href}
+                        target="_blank"
+                        rel="noopener"
+                        className={j === 0 ? "btn btn-primary" : "btn"}
+                      >
+                        {l.label}
+                      </a>
+                    ))}
                   </div>
                 </div>
-                <div data-dot-slot="kshetrajna" className="slot slot-lead" aria-hidden="true" />
-              </div>
-
-              <div className="card-lead-loop">
-                <p className="font-semibold">How every action moves through Kshetrajna</p>
-                <ActionLoop />
-                <p className="muted mt-5 text-[0.97rem]">
-                  Nothing reaches the Act step without an explicit approval, and every action keeps a route back. The
-                  same rule runs through Kshetrajna Drift and ReVoice below.
-                </p>
-              </div>
-            </article>
-
-            {/* Other projects */}
-            <ul className="mt-8 space-y-8">
-              {projects.map((p, i) => (
-                <li key={p.name}>
-                  <article
-                    data-dot-trigger={p.glyph}
-                    className={`card card-project ${i % 2 === 1 ? "is-flipped" : ""}`}
-                    aria-labelledby={`project-${p.glyph}`}
-                  >
-                    <div data-dot-slot={p.glyph} className="slot" aria-hidden="true" />
-                    <div className="min-w-0">
-                      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                        <h3 id={`project-${p.glyph}`} className="display card-name">
-                          {p.name}
-                        </h3>
-                        <p className="muted text-[0.95rem]">{p.year}</p>
-                      </div>
-                      <p className="measure mt-4 text-[1.08rem]">{p.what}</p>
-                      <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-[0.95rem]">
-                        {p.proof.map((f) => (
-                          <li key={f} className="font-medium">
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="muted mt-2 text-[0.95rem]">{p.stack}</p>
-                      <p className="mt-5 flex flex-wrap gap-x-6">
-                        {p.links.map((l) => (
-                          <a key={l.href} className="text-link" href={l.href} target="_blank" rel="noopener">
-                            {l.label}
-                          </a>
-                        ))}
-                      </p>
-                    </div>
-                  </article>
-                </li>
-              ))}
-            </ul>
+                <a
+                  href={p.links[0].href}
+                  target="_blank"
+                  rel="noopener"
+                  className="feature-shot"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                >
+                  <Frame {...p.shot} />
+                </a>
+              </article>
+            ))}
           </div>
+
+          <ul className="grid-projects">
+            {projects.map((p) => (
+              <li key={p.name} className="card">
+                <div className="card-head">
+                  <h3>{p.name}</h3>
+                  <span>{p.year}</span>
+                </div>
+                <p>{p.what}</p>
+                <p className="card-proof">{p.proof}</p>
+                <p className="stack">{p.stack}</p>
+                <a href={p.href} target="_blank" rel="noopener" className="text-link card-link">
+                  Source on GitHub
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* Experience */}
-        <section id="experience" className="bg-[var(--paper)]">
-          <div className="wrap py-20 lg:py-28">
-            <SectionHeading id="experience-heading">Experience</SectionHeading>
-            <ol className="mt-10">
-              {experience.map((e) => (
-                <li key={e.org} className="rule-top grid gap-2 py-7 md:grid-cols-[12rem_1fr] md:gap-10">
-                  <p className="muted condensed text-[1rem] font-semibold">{e.when}</p>
-                  <div className="measure">
-                    <h3 className="title text-[1.3rem]">
-                      {e.role}, {e.org}
-                    </h3>
-                    <p className="mt-2">{e.detail}</p>
-                    {e.links ? (
-                      <p className="mt-2 flex flex-wrap gap-x-5 text-[0.95rem]">
-                        {e.links.map((l) => (
-                          <a key={l.href} className="text-link" href={l.href} target="_blank" rel="noopener">
-                            {l.label}
-                          </a>
-                        ))}
-                      </p>
-                    ) : null}
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <div className="rule-top grid gap-2 py-7 md:grid-cols-[12rem_1fr] md:gap-10">
-              <p className="muted condensed text-[1rem] font-semibold">2024 – 2028</p>
-              <div>
-                <h3 className="title text-[1.3rem]">B.Tech, Computer Science and Engineering (AI and ML), UPES</h3>
-                <p className="mt-2">CGPA 8.7 out of 10, Dehradun.</p>
-              </div>
-            </div>
+        <section id="experience" className="container section">
+          <div className="section-head">
+            <h2>Experience</h2>
           </div>
+          <ol className="timeline">
+            {experience.map((e) => (
+              <li key={e.org}>
+                <p className="when">{e.when}</p>
+                <div>
+                  <h3>
+                    {e.role}, <span className="org">{e.org}</span>
+                  </h3>
+                  <p>{e.detail}</p>
+                  {e.links ? (
+                    <p className="row-links">
+                      {e.links.map((l) => (
+                        <a key={l.href} className="text-link" href={l.href} target="_blank" rel="noopener">
+                          {l.label}
+                        </a>
+                      ))}
+                    </p>
+                  ) : null}
+                </div>
+              </li>
+            ))}
+            <li>
+              <p className="when">2024 – 2028</p>
+              <div>
+                <h3>
+                  B.Tech, Computer Science (AI and ML), <span className="org">UPES Dehradun</span>
+                </h3>
+                <p>CGPA 8.7 out of 10.</p>
+              </div>
+            </li>
+          </ol>
         </section>
 
-        {/* Research and recognition */}
-        <section id="research">
-          <div className="wrap grid gap-14 py-20 lg:grid-cols-2 lg:py-28">
+        {/* About: research, recognition, skills */}
+        <section id="about" className="container section">
+          <div className="about">
             <div>
-              <SectionHeading id="research-heading">Research</SectionHeading>
-              <div className="mt-8 space-y-8">
-                <div className="measure">
-                  <h3 className="title text-[1.3rem]">How AI-generated content shapes human decisions</h3>
-                  <p className="mt-2">
-                    A study of AI-induced bias with mentors Pankaj Badoni (UPES) and an Indiana University alumnus. The
-                    literature review is under way and the manuscript is planned for December 2026.
+              <h2 className="h2-small">Research</h2>
+              <div className="stacked">
+                <div>
+                  <h3>How AI-generated content shapes human decisions</h3>
+                  <p>
+                    A study of AI-induced bias with mentors Pankaj Badoni (UPES) and an Indiana University alumnus.
+                    Literature review under way; manuscript planned for December 2026.
                   </p>
                 </div>
-                <div className="measure">
-                  <h3 className="title text-[1.3rem]">LSGA-ViT image recognition</h3>
-                  <p className="mt-2">
-                    A hybrid model that feeds a CNN stem into Vision Transformer blocks with Local Self-Gating
-                    Attention, supervised by faculty member Nitika Nigam.
+                <div>
+                  <h3>LSGA-ViT image recognition</h3>
+                  <p>
+                    A CNN stem feeding Vision Transformer blocks with Local Self-Gating Attention, supervised by faculty
+                    member Nitika Nigam.
                   </p>
                 </div>
               </div>
             </div>
             <div>
-              <SectionHeading id="recognition-heading">Recognition</SectionHeading>
-              <ul className="mt-8 space-y-6">
-                <li className="measure">
-                  <h3 className="title text-[1.3rem]">Smart India Hackathon 2025 Grand Finale</h3>
-                  <p className="mt-2">Qualified in December 2025 with a solution for collecting trip-related travel data.</p>
-                </li>
-                <li className="measure">
-                  <h3 className="title text-[1.3rem]">MeitY GENESIS Entrepreneur-in-Residence</h3>
-                  <p className="mt-2">Cohort 2, through UPES, with grant funding for NaviiGo.</p>
-                </li>
-              </ul>
-
-              <h2 className="title mt-14 text-[1.6rem]">Skills</h2>
-              <dl className="mt-5 space-y-3">
+              <h2 className="h2-small">Recognition</h2>
+              <div className="stacked">
+                <div>
+                  <h3>Smart India Hackathon 2025, Grand Finale</h3>
+                  <p>Qualified in December 2025 with a solution for collecting trip data.</p>
+                </div>
+                <div>
+                  <h3>MeitY GENESIS Entrepreneur-in-Residence</h3>
+                  <p>Cohort 2, through UPES, with grant funding for NaviiGo.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h2 className="h2-small">Skills</h2>
+              <dl className="skills">
                 {skills.map((s) => (
-                  <div key={s.group} className="grid gap-1 sm:grid-cols-[10rem_1fr] sm:gap-4">
-                    <dt className="font-semibold">{s.group}</dt>
-                    <dd className="muted">{s.items}</dd>
+                  <div key={s.group}>
+                    <dt>{s.group}</dt>
+                    <dd>{s.items}</dd>
                   </div>
                 ))}
               </dl>
@@ -319,50 +364,32 @@ export default function HomePage() {
         </section>
 
         {/* Contact */}
-        <section id="contact" data-dot-trigger="contact" className="bg-[var(--paper)]">
-          <div className="wrap grid gap-12 py-20 lg:grid-cols-[1fr_1fr] lg:items-center lg:py-28">
-            <div>
-              <div data-dot-slot="contact" className="slot slot-contact" aria-hidden="true" />
-              <p className="mt-8 text-lg">Hiring for a software engineering internship, or building something with agents?</p>
-              <a href={`mailto:${EMAIL}`} className="display contact-email mt-4 block">
-                Email me
+        <section id="contact" className="container section">
+          <div className="contact">
+            <h2>Let’s talk</h2>
+            <p>Hiring for a software engineering internship, or building something with AI agents? Email me.</p>
+            <a href={`mailto:${EMAIL}`} className="contact-email">
+              {EMAIL}
+            </a>
+            <div className="actions">
+              <a href={RESUME} target="_blank" rel="noopener" className="btn btn-primary">
+                Download résumé
               </a>
-              <p className="mt-3 text-lg">
-                <a className="text-link" href={`mailto:${EMAIL}`}>
-                  {EMAIL}
-                </a>
-              </p>
-              <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[1rem]" aria-label="More links">
-                <li>
-                  <a className="text-link" href={RESUME} target="_blank" rel="noopener">
-                    Résumé (PDF)
-                  </a>
-                </li>
-                <li>
-                  <a className="text-link" href="https://github.com/ParramNainani" target="_blank" rel="noopener">
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a className="text-link" href="https://linkedin.com/in/parramnainani" target="_blank" rel="noopener">
-                    LinkedIn
-                  </a>
-                </li>
-              </ul>
+              <a href={GITHUB} target="_blank" rel="noopener" className="btn">
+                GitHub
+              </a>
+              <a href={LINKEDIN} target="_blank" rel="noopener" className="btn">
+                LinkedIn
+              </a>
             </div>
-            <ApprovalRequest
-              title="Interview Parram for a software engineering role"
-              why="He ships agents that explain themselves and ask first, with tests to prove it, and is open to software engineering internships."
-              effect="Your email app opens a message to parramnainani@gmail.com. Nothing is sent until you press send."
-              approvedNote="Your email app should be opening now. If it isn't, write to parramnainani@gmail.com."
-              approveHref={`mailto:${EMAIL}?subject=Interview%20with%20Parram%20Nainani`}
-              secondary={{ label: "Open résumé", href: RESUME }}
-            />
           </div>
-          <p className="wrap pb-10 text-sm muted">© 2026 Parram Nainani. Built with Next.js, Three.js and GSAP.</p>
         </section>
       </main>
-      <DotField />
+
+      <footer className="container footer">
+        <p>© 2026 Parram Nainani</p>
+        <p>New Delhi, India</p>
+      </footer>
     </div>
   )
 }
