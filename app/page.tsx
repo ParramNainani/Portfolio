@@ -1,5 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { WorkRing, type RingCard } from "@/components/site/work-ring"
+import { WorkGallery, type Panel } from "@/components/site/work-gallery"
+import { Terminal, type TerminalData } from "@/components/site/terminal"
+import { Interactions } from "@/components/site/interactions"
 
 const RESUME = "/Parram_Nainani_Resume.pdf"
 const EMAIL = "parramnainani@gmail.com"
@@ -8,79 +11,100 @@ const LINKEDIN = "https://linkedin.com/in/parramnainani"
 
 type Link = { label: string; href: string }
 
-const featured = [
+const panels: Panel[] = [
   {
+    id: "project-kshetrajna",
     name: "Kshetrajna",
-    year: "2026",
-    tagline: "A private AI assistant for Windows PCs",
+    eyebrow: "A private AI assistant for Windows PCs, 2026",
     what: "It watches app activity and memory pressure, explains what it would change and why, and only acts once you approve: reprioritising apps, trimming memory, moving files to a quarantine you can restore from.",
     proof: [
       "573 automated tests, CI on Linux and native Windows",
-      "Approvals expire, can’t be replayed, and every action is journaled for recovery",
+      "Approvals expire, can’t be replayed, and every action is journaled",
       "Native Windows builds for x64 and ARM64 (Snapdragon)",
     ],
     stack: "Python, Win32 APIs, SQLite, GitHub Actions",
-    shot: {
-      src: "/shot-kshetrajna.jpg",
-      url: "kshetrajna-os.runs-at.dev",
-      alt: "Kshetrajna's demo dashboard showing CPU, memory and workflow cards",
-    },
     links: [
       { label: "Try the live demo", href: "https://kshetrajna-os.runs-at.dev/" },
-      { label: "Source on GitHub", href: "https://github.com/Team-SankatMochan/KSHETRAJNA-OS" },
-    ] as Link[],
+      { label: "Source", href: "https://github.com/Team-SankatMochan/KSHETRAJNA-OS" },
+    ],
+    visual: { kind: "shot", src: "/shot-kshetrajna.jpg", url: "kshetrajna-os.runs-at.dev", alt: "Kshetrajna's demo dashboard" },
+    tone: "#a9b6ff",
   },
   {
+    id: "project-naviigo",
     name: "NaviiGo",
-    year: "2025 – now",
-    tagline: "The travel-tech company I founded and run",
-    what: "naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one place. I lead a team of 5–7 and build the product. It has just launched, and our pilot starts around New Year 2027.",
+    eyebrow: "The travel-tech company I founded and run, 2025 – now",
+    what: "naviigo.in helps travellers in India discover places, plan routes and itineraries, and keep their bookings in one place. I lead a team of 5–7 and build the product. It has just launched; our pilot starts around New Year 2027.",
     proof: [
-      "Flight trip types, rail timetables and hotel links in one planner",
+      "Flights, rail timetables and hotel links in one planner",
       "MeitY GENESIS Entrepreneur-in-Residence, Cohort 2, with grant funding",
     ],
     stack: "Next.js on Vercel",
-    shot: {
-      src: "/shot-naviigo.jpg",
-      url: "naviigo.in",
-      alt: "NaviiGo's home page with a map of India and the line Travel should feel like a journey",
+    links: [{ label: "Visit naviigo.in", href: "https://naviigo.in" }],
+    visual: { kind: "shot", src: "/shot-naviigo.jpg", url: "naviigo.in", alt: "NaviiGo's home page" },
+    tone: "#f08a4b",
+  },
+  {
+    id: "project-coe-nexus",
+    name: "COE Nexus sites",
+    eyebrow: "Client work as a web developer, 2026 – now",
+    what: "I build and maintain 7+ live event and media sites for summits and awards, including the registration and nomination flows.",
+    proof: ["GCC Catalyst Summit, Chennai", "CoE Awards, 2nd edition, Hyderabad"],
+    stack: "React, Vite, Firebase, GSAP",
+    links: [
+      { label: "CoE Awards", href: "https://coe-awards-hyderabad.coe-nexus.com/" },
+      { label: "GCC Catalyst Summit", href: "https://gcc-catalyst-summit.coe-nexus.com/" },
+    ],
+    visual: {
+      kind: "pair",
+      a: { src: "/ring/coe-awards.jpg", alt: "CoE Awards Hyderabad home page" },
+      b: { src: "/ring/gcc.jpg", alt: "GCC Catalyst Summit home page" },
     },
-    links: [{ label: "Visit naviigo.in", href: "https://naviigo.in" }] as Link[],
+    tone: "#e8a33d",
   },
-]
-
-const projects = [
   {
+    id: "project-drift",
     name: "Kshetrajna Drift",
-    year: "2026",
-    what: "A local AI agent for messy folders. Llama 3.1 runs on your own machine, suggests where each file belongs and why, then moves only the files you approve.",
-    proof: "31 tests, SHA-256 re-checks before every move, undo journal",
+    eyebrow: "Local AI agent, 2026",
+    what: "An AI agent for messy folders. Llama 3.1 runs on your own machine, suggests where each file belongs and why, then moves only the files you approve.",
+    proof: ["31 tests on Windows", "SHA-256 re-checks before every move", "Undo journal with crash recovery"],
     stack: "Python, Llama 3.1 8B (Ollama), SQLite",
-    href: "https://github.com/ParramNainani/kshetrajna-drift",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/kshetrajna-drift" }],
+    visual: { kind: "files" },
+    tone: "#5eead4",
   },
   {
+    id: "project-revoice",
     name: "ReVoice",
-    year: "2026",
-    what: "A voice support agent that copes with being interrupted. Answers to a request you’ve changed your mind about are thrown away instead of spoken.",
-    proof: "Built for the Rime hackathon; an acceptance test replays a real interruption",
+    eyebrow: "Voice agent, Rime hackathon, 2026",
+    what: "A voice support agent that copes with being interrupted. Every request gets a generation ID, so answers to a request you changed your mind about are thrown away instead of spoken.",
+    proof: ["Corrected answer accepted about 305 ms after an interruption", "Acceptance test replays a real interruption"],
     stack: "TypeScript, LiveKit Agents, Deepgram, OpenAI",
-    href: "https://github.com/ParramNainani/DataForge",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/DataForge" }],
+    visual: { kind: "wave" },
+    tone: "#a78bfa",
   },
   {
+    id: "project-rl",
     name: "Support-triage RL environment",
-    year: "2026",
-    what: "An OpenEnv environment where an LLM agent decides whether to resolve, investigate or escalate customer tickets.",
-    proof: "Graded rewards at 3 difficulty levels, Dockerised for Hugging Face Spaces",
+    eyebrow: "OpenEnv, 2026",
+    what: "An environment where an LLM agent decides whether to resolve, investigate or escalate customer tickets, graded at three difficulty levels.",
+    proof: ["Rewards from 0 to 1 per decision", "Dockerised for Hugging Face Spaces"],
     stack: "Python, OpenEnv, Docker, Gradio",
-    href: "https://github.com/ParramNainani/OpenENV-ScalerSchool",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/OpenENV-ScalerSchool" }],
+    visual: { kind: "grid" },
+    tone: "#f5b544",
   },
   {
+    id: "project-finance",
     name: "Finance dashboard API",
-    year: "2026",
+    eyebrow: "Node.js back end, 2026",
     what: "A REST API for a finance dashboard with three roles, filterable records and endpoints for totals, daily trends and categories.",
-    proof: "JWT auth, role-based access, Zod validation, Swagger docs",
+    proof: ["JWT auth and role-based access", "Zod validation and Swagger docs"],
     stack: "Node.js, Express, PostgreSQL, Prisma, Docker",
-    href: "https://github.com/ParramNainani/Project-Backend",
+    links: [{ label: "Source", href: "https://github.com/ParramNainani/Project-Backend" }],
+    visual: { kind: "bars" },
+    tone: "#60a5fa",
   },
 ]
 
@@ -116,13 +140,36 @@ const experience: { when: string; role: string; org: string; detail: string; lin
   },
 ]
 
-const skills = [
-  { group: "Languages", items: "Python, TypeScript, JavaScript, Java, Dart, SQL" },
-  { group: "AI and agents", items: "LLM agents, Ollama, LiveKit Agents, RAG, PyTorch, scikit-learn" },
-  { group: "Web and back end", items: "React, Next.js, Node.js, Express, PostgreSQL, Prisma, Firebase" },
-  { group: "Tools", items: "Git, GitHub Actions, Docker, Vercel, Flutter" },
-]
+const terminal: TerminalData = {
+  about: "Parram Nainani. CS (AI and ML) student at UPES, founder of NaviiGo, web developer at COE Nexus. I build AI agents and web products, and ship them with tests.",
+  projects: [
+    { name: "kshetrajna", line: "private AI assistant for Windows", href: "https://kshetrajna-os.runs-at.dev/" },
+    { name: "naviigo", line: "travel-tech startup", href: "https://naviigo.in" },
+    { name: "kshetrajna-drift", line: "local AI filing agent", href: "https://github.com/ParramNainani/kshetrajna-drift" },
+    { name: "revoice", line: "interruption-safe voice agent", href: "https://github.com/ParramNainani/DataForge" },
+    { name: "triage-rl-env", line: "OpenEnv environment", href: "https://github.com/ParramNainani/OpenENV-ScalerSchool" },
+    { name: "finance-api", line: "Node.js back end", href: "https://github.com/ParramNainani/Project-Backend" },
+  ],
+  skills: [
+    "languages   Python, TypeScript, JavaScript, Java, Dart, SQL",
+    "ai/agents   LLM agents, Ollama, LiveKit Agents, RAG, PyTorch",
+    "web         React, Next.js, Node.js, Express, PostgreSQL, Firebase",
+    "tools       Git, GitHub Actions, Docker, Vercel, Flutter",
+  ],
+  experience: [
+    "2025–now   Founder and CEO, NaviiGo",
+    "2026–now   Web developer, COE Nexus",
+    "2025       Full-stack development intern, BinaryKeeda",
+    "2025       Software development intern (Flutter), NetStratix",
+  ],
+  email: EMAIL,
+  resume: RESUME,
+  github: GITHUB,
+  linkedin: LINKEDIN,
+}
 
+const marqueeA = ["AI agents", "Local-first tools", "Voice agents", "Next.js", "Python", "React", "TypeScript", "LLMs on device"]
+const marqueeB = ["573 tests", "Win32 APIs", "PostgreSQL", "Firebase", "Docker", "Three.js", "GSAP", "Flutter"]
 
 const ringCards: RingCard[] = [
   { title: "Kshetrajna", kind: "AI assistant for Windows", href: "#project-kshetrajna", src: "/ring/kshetrajna.jpg" },
@@ -166,20 +213,6 @@ const ringCards: RingCard[] = [
 ]
 
 const delay = (ms: number) => ({ ["--d" as string]: `${ms}ms` }) as React.CSSProperties
-
-function Frame({ src, url, alt }: { src: string; url: string; alt: string }) {
-  return (
-    <div className="frame">
-      <div className="frame-bar" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <p>{url}</p>
-      </div>
-      <img src={src} alt={alt} width={800} height={500} loading="lazy" />
-    </div>
-  )
-}
 
 export default function HomePage() {
   return (
@@ -241,77 +274,27 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Marquee */}
+        <section className="marquee" aria-label="What I work with">
+          <div className="marquee-row">
+            <div className="marquee-track">
+              {[...marqueeA, ...marqueeA].map((w, i) => (
+                <span key={i}>{w}</span>
+              ))}
+            </div>
+          </div>
+          <div className="marquee-row is-reverse" aria-hidden="true">
+            <div className="marquee-track">
+              {[...marqueeB, ...marqueeB].map((w, i) => (
+                <span key={i}>{w}</span>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Work */}
-        <section id="work" className="container section">
-          <div className="section-head">
-            <h2>Selected work</h2>
-            <p>Products and projects I built and can show. Client work for companies is under Experience.</p>
-          </div>
-
-          <div className="featured">
-            {featured.map((p, i) => (
-              <article
-                key={p.name}
-                id={`project-${p.name.toLowerCase()}`}
-                className={`feature ${i % 2 === 1 ? "is-flipped" : ""}`}
-                aria-labelledby={`f-${i}`}
-              >
-                <div className="feature-text">
-                  <p className="eyebrow">
-                    {p.tagline}, {p.year}
-                  </p>
-                  <h3 id={`f-${i}`}>{p.name}</h3>
-                  <p className="feature-what">{p.what}</p>
-                  <ul className="proof">
-                    {p.proof.map((x) => (
-                      <li key={x}>{x}</li>
-                    ))}
-                  </ul>
-                  <p className="stack">{p.stack}</p>
-                  <div className="actions">
-                    {p.links.map((l, j) => (
-                      <a
-                        key={l.href}
-                        href={l.href}
-                        target="_blank"
-                        rel="noopener"
-                        className={j === 0 ? "btn btn-primary" : "btn"}
-                      >
-                        {l.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-                <a
-                  href={p.links[0].href}
-                  target="_blank"
-                  rel="noopener"
-                  className="feature-shot"
-                  tabIndex={-1}
-                  aria-hidden="true"
-                >
-                  <Frame {...p.shot} />
-                </a>
-              </article>
-            ))}
-          </div>
-
-          <ul className="grid-projects">
-            {projects.map((p) => (
-              <li key={p.name} className="card">
-                <div className="card-head">
-                  <h3>{p.name}</h3>
-                  <span>{p.year}</span>
-                </div>
-                <p>{p.what}</p>
-                <p className="card-proof">{p.proof}</p>
-                <p className="stack">{p.stack}</p>
-                <a href={p.href} target="_blank" rel="noopener" className="text-link card-link">
-                  Source on GitHub
-                </a>
-              </li>
-            ))}
-          </ul>
+        <section id="work">
+          <WorkGallery panels={panels} />
         </section>
 
         {/* Experience */}
@@ -322,6 +305,7 @@ export default function HomePage() {
           <ol className="timeline">
             {experience.map((e) => (
               <li key={e.org}>
+                <span className="node" aria-hidden="true" />
                 <p className="when">{e.when}</p>
                 <div>
                   <h3>
@@ -341,6 +325,7 @@ export default function HomePage() {
               </li>
             ))}
             <li>
+              <span className="node" aria-hidden="true" />
               <p className="when">2024 – 2028</p>
               <div>
                 <h3>
@@ -387,16 +372,9 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div>
-              <h2 className="h2-small">Skills</h2>
-              <dl className="skills">
-                {skills.map((s) => (
-                  <div key={s.group}>
-                    <dt>{s.group}</dt>
-                    <dd>{s.items}</dd>
-                  </div>
-                ))}
-              </dl>
+            <div className="about-term">
+              <h2 className="h2-small">Ask my terminal</h2>
+              <Terminal data={terminal} />
             </div>
           </div>
         </section>
@@ -406,17 +384,23 @@ export default function HomePage() {
           <div className="contact">
             <h2>Let’s talk</h2>
             <p>Hiring for a software engineering internship, or building something with AI agents? Email me.</p>
-            <a href={`mailto:${EMAIL}`} className="contact-email">
-              {EMAIL}
-            </a>
+            <button type="button" className="contact-email" data-copy={EMAIL}>
+              <span>{EMAIL}</span>
+              <span className="copy-hint" data-copy-label aria-live="polite">
+                Click to copy
+              </span>
+            </button>
             <div className="actions">
-              <a href={RESUME} target="_blank" rel="noopener" className="btn btn-primary">
+              <a href={`mailto:${EMAIL}`} className="btn btn-primary magnetic">
+                Email me
+              </a>
+              <a href={RESUME} target="_blank" rel="noopener" className="btn magnetic">
                 Download résumé
               </a>
-              <a href={GITHUB} target="_blank" rel="noopener" className="btn">
+              <a href={GITHUB} target="_blank" rel="noopener" className="btn magnetic">
                 GitHub
               </a>
-              <a href={LINKEDIN} target="_blank" rel="noopener" className="btn">
+              <a href={LINKEDIN} target="_blank" rel="noopener" className="btn magnetic">
                 LinkedIn
               </a>
             </div>
@@ -428,6 +412,7 @@ export default function HomePage() {
         <p>© 2026 Parram Nainani</p>
         <p>New Delhi, India</p>
       </footer>
+      <Interactions />
     </div>
   )
 }

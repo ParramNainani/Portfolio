@@ -295,7 +295,15 @@ export function WorkRing({ cards }: { cards: RingCard[] }) {
         if (moved < 6 && hovered >= 0) {
           const card = cards[hovered]
           if (card.external) window.open(card.href, "_blank", "noopener")
-          else document.querySelector(card.href)?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" })
+          else {
+            const handled = !window.dispatchEvent(
+              new CustomEvent("portfolio:goto", { detail: card.href, cancelable: true }),
+            )
+            if (!handled)
+              document
+                .querySelector(card.href)
+                ?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start", inline: "start" })
+          }
         }
       }
       const onLeave = () => {
