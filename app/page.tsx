@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { WorkRing, type RingCard } from "@/components/site/work-ring"
 
 const RESUME = "/Parram_Nainani_Resume.pdf"
 const EMAIL = "parramnainani@gmail.com"
@@ -122,6 +123,48 @@ const skills = [
   { group: "Tools", items: "Git, GitHub Actions, Docker, Vercel, Flutter" },
 ]
 
+
+const ringCards: RingCard[] = [
+  { title: "Kshetrajna", kind: "AI assistant for Windows", href: "#project-kshetrajna", src: "/ring/kshetrajna.jpg" },
+  {
+    title: "Kshetrajna Drift",
+    kind: "Local AI agent",
+    href: "https://github.com/ParramNainani/kshetrajna-drift",
+    external: true,
+    poster: { bg: "#0f2d24", ink: "#eafff4", accent: "#5eead4", tagline: "Files sorted by a local LLM, only with your OK", motif: "files" },
+  },
+  { title: "CoE Awards", kind: "Event site, COE Nexus", href: "https://coe-awards-hyderabad.coe-nexus.com/", external: true, src: "/ring/coe-awards.jpg" },
+  {
+    title: "Hi, I’m Parram",
+    kind: "Get in touch",
+    href: "#contact",
+    poster: { bg: "#e9edf2", ink: "#0e1117", accent: "#0e1117", tagline: "The person behind all of this", motif: "photo" },
+  },
+  { title: "NaviiGo", kind: "My travel-tech startup", href: "#project-naviigo", src: "/ring/naviigo.jpg" },
+  {
+    title: "ReVoice",
+    kind: "Voice agent, Rime hackathon",
+    href: "https://github.com/ParramNainani/DataForge",
+    external: true,
+    poster: { bg: "#1d1640", ink: "#f1edff", accent: "#a78bfa", tagline: "Interrupt it. It drops the stale answer.", motif: "wave" },
+  },
+  { title: "GCC Catalyst Summit", kind: "Event site, COE Nexus", href: "https://gcc-catalyst-summit.coe-nexus.com/", external: true, src: "/ring/gcc.jpg" },
+  {
+    title: "Triage RL environment",
+    kind: "OpenEnv",
+    href: "https://github.com/ParramNainani/OpenENV-ScalerSchool",
+    external: true,
+    poster: { bg: "#2b1d08", ink: "#fff6e6", accent: "#f5b544", tagline: "Graded rewards for an LLM agent", motif: "grid" },
+  },
+  {
+    title: "Finance API",
+    kind: "Node.js back end",
+    href: "https://github.com/ParramNainani/Project-Backend",
+    external: true,
+    poster: { bg: "#0c1f3d", ink: "#eaf2ff", accent: "#60a5fa", tagline: "Roles, records and trend endpoints", motif: "bars" },
+  },
+]
+
 const delay = (ms: number) => ({ ["--d" as string]: `${ms}ms` }) as React.CSSProperties
 
 function Frame({ src, url, alt }: { src: string; url: string; alt: string }) {
@@ -162,50 +205,40 @@ export default function HomePage() {
       </header>
 
       <main id="top">
-        {/* Hero */}
-        <section className="container hero">
-          <div className="hero-text">
+        {/* Hero: a 3D ring of real work behind the name */}
+        <section className="ring-hero">
+          <WorkRing cards={ringCards} />
+          <div className="container ring-overlay">
             <p className="status rise" style={delay(0)}>
               <span className="status-dot" aria-hidden="true" />
               Open to software engineering internships
             </p>
-            <h1 className="rise" style={delay(60)}>
-              Parram Nainani
+            <p className="ring-hint rise" style={delay(400)}>
+              Drag the ring. Click a card to open it.
+            </p>
+            <h1 className="ring-name rise" style={delay(80)}>
+              <span>Parram</span>
+              <span>Nainani</span>
             </h1>
-            <p className="lede rise" style={delay(120)}>
-              I build AI agents and web products, and ship them with tests.
-            </p>
-            <p className="hero-meta rise" style={delay(180)}>
-              Computer science (AI and ML) at UPES. Founder of NaviiGo. Web developer at COE Nexus.
-            </p>
-            <div className="actions rise" style={delay(240)}>
-              <a href={RESUME} target="_blank" rel="noopener" className="btn btn-primary">
-                Download résumé
-              </a>
-              <a href={`mailto:${EMAIL}`} className="btn">
-                Email me
-              </a>
-              <a href={GITHUB} target="_blank" rel="noopener" className="text-link">
-                GitHub
-              </a>
-              <a href={LINKEDIN} target="_blank" rel="noopener" className="text-link">
-                LinkedIn
-              </a>
+            <div className="ring-side rise" style={delay(200)}>
+              <p className="lede">I build AI agents and web products, and ship them with tests.</p>
+              <p className="hero-meta">CS (AI and ML) at UPES. Founder of NaviiGo. Web developer at COE Nexus.</p>
+              <div className="actions">
+                <a href={RESUME} target="_blank" rel="noopener" className="btn btn-primary">
+                  Download résumé
+                </a>
+                <a href={`mailto:${EMAIL}`} className="btn">
+                  Email me
+                </a>
+                <a href={GITHUB} target="_blank" rel="noopener" className="text-link">
+                  GitHub
+                </a>
+                <a href={LINKEDIN} target="_blank" rel="noopener" className="text-link">
+                  LinkedIn
+                </a>
+              </div>
             </div>
           </div>
-
-          <figure className="hero-photo rise" style={delay(120)}>
-            <img src="/parram.jpg" alt="Parram Nainani" width={500} height={500} />
-            <figcaption className="now">
-              <span className="now-label">Now building</span>
-              <span>
-                <strong>Kshetrajna</strong>, a local AI assistant for Windows.{" "}
-                <a href="https://kshetrajna-os.runs-at.dev/" target="_blank" rel="noopener" className="text-link">
-                  Try the demo
-                </a>
-              </span>
-            </figcaption>
-          </figure>
         </section>
 
         {/* Work */}
@@ -217,7 +250,12 @@ export default function HomePage() {
 
           <div className="featured">
             {featured.map((p, i) => (
-              <article key={p.name} className={`feature ${i % 2 === 1 ? "is-flipped" : ""}`} aria-labelledby={`f-${i}`}>
+              <article
+                key={p.name}
+                id={`project-${p.name.toLowerCase()}`}
+                className={`feature ${i % 2 === 1 ? "is-flipped" : ""}`}
+                aria-labelledby={`f-${i}`}
+              >
                 <div className="feature-text">
                   <p className="eyebrow">
                     {p.tagline}, {p.year}
